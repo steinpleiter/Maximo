@@ -15,7 +15,7 @@ describe('gameplay artwork', () => {
     const report = await loadAssets();
     expect(report.missing).toEqual([]);
     expect(report.placeholders).toBe(2); // Cell backgrounds intentionally remain vector-drawn.
-    expect(urlFor('special.dynamite')).toContain('Bomb.png');
+    expect(urlFor('special.dynamite')).toContain('symbol-dynamite-v1.png');
     expect(urlFor('coinGame.scorpion')).toContain('scorpion.svg');
   });
 
@@ -26,7 +26,7 @@ describe('gameplay artwork', () => {
       expect(keyForCoin(value)).toBe(expected);
       expect(keyForCell({ id: 1, kind: 'coin', coinValue: value }, levels)).toBe(expected);
     }
-    expect(textures['special.coin']).toBe('effects/money-bag.svg');
+    expect(textures['special.coin']).toBe('symbol-coin-v1.png');
     expect(keyForCoin(0.09)).toBe('special.coin');
     expect(textures[keyForCoin(10000)]).toBe('icons/CoinMaxWin.png');
   });

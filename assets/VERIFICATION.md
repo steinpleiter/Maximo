@@ -20,3 +20,8 @@ The new 1536 × 1024 opaque background was visually inspected against the suppli
 The new gem was visually inspected against the silver-hat photo, selecting the man on the right. Its transparent alpha and visible bounds were measured. All seven purple gem texture keys now reference gem-purple-v4.png. Historical pending notes above are superseded.
 
 CLI integration checks: all seven purple texture keys resolve to the new file, its metadata records genuine alpha, and npm run build passes (TypeScript plus Vite). The production output includes the purple PNG. Browser rendering was not checked in this revision.
+
+## Seven feature-symbol images — 10 October 2026
+All seven generated icons were visually inspected against ELK’s original symbol PNGs and paytable screenshots. Each is a 1254 × 1254 RGBA PNG with alpha extrema 0–255 and measured visible bounds. Coin has no baked-in payout. All seven game texture mappings now point to the new files. The repository preview and manifest exclude the three alternative backgrounds already absent from main.
+
+Integration validation: all seven keys map to the correct PNGs; metadata and alpha checks passed. npm run build passes (TypeScript and Vite), and each built icon is byte-identical to its saved PNG. All mapped repository textures and preview image paths resolve. Browser rendering was not verified.

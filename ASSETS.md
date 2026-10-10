@@ -17,15 +17,15 @@ art; only `board.cell` and `board.trainCell` intentionally remain null.
 | `gem.<colour>.<1–7>` | Existing Max portrait gem per colour; level pips remain live |
 | `bird.<colour>`, `bandit` | Existing Max Birds characters |
 | `special.wild` | Promotional `Wild.png` |
-| `special.wildBandit` | Promotional `WildBlack.png` |
+| `special.wildBandit` | Generated `symbol-bandit-wild-v1.png` from the main-branch art update |
 | `special.upgrade.<1–3>` | `LevelUp.png`, `LevelUp_2.png`, `LevelUp_3.png` |
 | `special.upgradeAll.<1–3>` | Corresponding `LevelUpAll` variants |
 | `special.coin.<value>` | Exact matching promotional money bag |
-| `special.coin` | Neutral SVG money bag with live denomination |
-| `special.dynamite`, `special.bigDynamite` | `Bomb.png` and `BigBomb.png` |
+| `special.coin` | Generated `symbol-coin-v1.png` with live denomination |
+| `special.dynamite`, `special.bigDynamite` | Generated `symbol-dynamite-v1.png` and promotional `BigBomb.png` |
 | `special.peanut` | Promotional `Peanut.png` |
-| `special.transform` | Promotional `Transform.png` |
-| `special.key` | Promotional `Key.png` |
+| `special.transform` | Generated `symbol-transform-v1.png` |
+| `special.key` | Generated `symbol-key-v1.png` |
 | `special.bonus`, `special.superBonus` | Promotional `Bonus.png`, `SuperBonus.png` |
 | `special.crossover`, `special.nest` | Registered promotional artwork; no separate engine symbol kind |
 
@@ -105,3 +105,12 @@ uses `music001.mp3`. Fourteen short effects were extracted from all four banks.
 `assets/audio/cues.json` records source offsets, gains and acoustic confidence;
 `assets/audio/CUES.md` records the spectrogram/classification analysis. These
 are inferred event roles, not original publisher cue names.
+
+## Concurrent symbol-art update
+
+The seven generated feature PNGs from main are retained with their alpha bounds
+and source research. Their base manifest keys use the new artwork; exact
+denominations and upgrade-step variants keep the promotional variants.
+See `assets/SYMBOL-REFERENCE-RESEARCH.md`. The neutral SVG money bag remains
+the sealed coin-game reveal, while unmatched board denominations use the new
+unnumbered PNG money bag with a live value badge.
