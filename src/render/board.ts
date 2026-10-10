@@ -1,11 +1,28 @@
-import { Container, Graphics } from 'pixi.js';
-import { CELL_SIZE } from './assets';
+import { Container, Graphics, NineSliceSprite } from 'pixi.js';
+import { CELL_SIZE, textureFor } from './assets';
 import { GEM_TINTS, SymbolView } from './symbols';
 import { easeInCubic, easeOutBack, easeOutCubic, lerp, tween } from './tween';
 import type { Cell, CellSnapshot, GemColor, Pos } from '../math/types';
 
 const GAP = CELL_SIZE * 0.06;
-const PAD = CELL_SIZE * 0.3;
+
+/**
+ * Margin between the outer cells and the edge of the board.
+ *
+ * It has to clear the track frame's thickness (see FRAME_SCALE), or the rails
+ * would sit on top of the first row and column.
+ */
+const PAD = CELL_SIZE * 0.58;
+
+/**
+ * Texture pixels to board pixels for the frame art.
+ *
+ * The frame is nine-sliced so the corners keep their curve while the straight
+ * runs stretch. Corners render at native size, so the whole thing is drawn
+ * oversized and scaled down by this factor to land at a sane track thickness.
+ */
+const FRAME_SCALE = 0.34;
+const FRAME_CORNER = 330;
 
 /**
  * The playfield: a pool of symbol views keyed by the engine's cell ids, plus
@@ -23,6 +40,8 @@ export class Board extends Container {
   private readonly cellLayer = new Container();
   private readonly symbolLayer = new Container();
   private readonly fxLayer = new Container();
+  /** The track frame sits above the symbols, so they ride behind the rails. */
+  private readonly frameLayer = new Container();
 
   private readonly views = new Map<number, SymbolView>();
   /** Logical cell each view occupies, so a position can be resolved to an id. */
@@ -32,7 +51,7 @@ export class Board extends Container {
 
   constructor() {
     super();
-    this.addChild(this.bgLayer, this.cellLayer, this.symbolLayer, this.fxLayer);
+    this.addChild(this.bgLayer, this.cellLayer, this.symbolLayer, this.fxLayer, this.frameLayer);
   }
 
   // --- geometry ------------------------------------------------------------
@@ -63,12 +82,35 @@ export class Board extends Container {
   private drawBackdrop(): void {
     this.bgLayer.removeChildren().forEach((child) => child.destroy({ children: true }));
     this.cellLayer.removeChildren().forEach((child) => child.destroy({ children: true }));
+    this.frameLayer.removeChildren().forEach((child) => child.destroy({ children: true }));
 
-    const frame = new Graphics();
-    frame.roundRect(0, 0, this.boardWidth, this.boardHeight, PAD * 0.8);
-    frame.fill({ color: 0x1b1410 });
-    frame.stroke({ width: 2, color: 0x3d2f25 });
-    this.bgLayer.addChild(frame);
+    // A translucent panel so symbols stay readable over the painted backdrop.
+    const panel = new Graphics();
+    panel.roundRect(PAD * 0.45, PAD * 0.45, this.boardWidth - PAD * 0.9, this.boardHeight - PAD * 0.9, PAD * 0.7);
+    panel.fill({ color: 0x120d1c, alpha: 0.55 });
+    this.bgLayer.addChild(panel);
+
+    const frameTexture = textureFor('board.frame');
+    if (frameTexture) {
+      const holder = new Container();
+      const frame = new NineSliceSprite({
+        texture: frameTexture,
+        leftWidth: FRAME_CORNER,
+        topHeight: FRAME_CORNER,
+        rightWidth: FRAME_CORNER,
+        bottomHeight: FRAME_CORNER,
+      });
+      frame.width = this.boardWidth / FRAME_SCALE;
+      frame.height = this.boardHeight / FRAME_SCALE;
+      holder.addChild(frame);
+      holder.scale.set(FRAME_SCALE);
+      this.frameLayer.addChild(holder);
+    } else {
+      const frame = new Graphics();
+      frame.roundRect(0, 0, this.boardWidth, this.boardHeight, PAD * 0.8);
+      frame.stroke({ width: 2, color: 0x3d2f25 });
+      this.bgLayer.addChild(frame);
+    }
 
     const isTrain = (r: number, c: number) =>
       this.trainCells.some((t) => t.r === r && t.c === c);
@@ -88,11 +130,11 @@ export class Board extends Container {
         if (isTrain(r, c)) {
           // The train backdrop has to be obvious — robbing both edges is how
           // the heist triggers, so the player needs to see the targets.
-          cell.fill({ color: 0x3a2a14 });
-          cell.stroke({ width: 2, color: 0xb9761b, alpha: 0.9 });
+          cell.fill({ color: 0x5a3f12, alpha: 0.78 });
+          cell.stroke({ width: 2, color: 0xe9a33a, alpha: 0.9 });
         } else {
-          cell.fill({ color: 0x241b15, alpha: 0.9 });
-          cell.stroke({ width: 1, color: 0x33271f });
+          cell.fill({ color: 0x0d0a14, alpha: 0.3 });
+          cell.stroke({ width: 1, color: 0xffffff, alpha: 0.07 });
         }
 
         this.cellLayer.addChild(cell);

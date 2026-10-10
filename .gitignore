@@ -3,3 +3,6 @@ dist/
 .vite/
 *.local
 .DS_Store
+
+# Reference screenshots of other games — kept locally, never committed
+image.png

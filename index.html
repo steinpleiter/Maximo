@@ -3,42 +3,51 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Maximo</title>
+    <title>Max Birds</title>
     <link rel="stylesheet" href="/src/render/ui/style.css" />
   </head>
   <body>
     <div id="app">
-      <!-- The grid itself is drawn by PixiJS; the chrome around it is DOM, which
-           keeps text legible, responsive and easy to restyle. -->
-      <div id="stage"></div>
+      <!-- Painted backdrop from the art pack; the board floats over it. -->
+      <div id="backdrop"></div>
+      <div id="backdrop-shade"></div>
 
       <header id="hud-top">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">◆</span>
-          <span class="brand-name">Maximo</span>
-        </div>
+        <img id="title-emblem" alt="Max Birds" />
 
         <div id="levels" class="levels" aria-label="Gem levels"></div>
 
         <div class="readouts">
-          <div class="readout" id="readout-streak">
+          <div class="readout">
             <span class="readout-label">Streak</span>
             <span class="readout-value" id="value-streak">0</span>
           </div>
-          <div class="readout" id="readout-accuracy">
+          <div class="readout">
             <span class="readout-label">Correct</span>
             <span class="readout-value" id="value-accuracy">—</span>
           </div>
         </div>
       </header>
 
-      <div id="meter-wrap">
-        <div class="meter-label">Collection</div>
-        <div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div>
-        <div class="meter-releases" id="meter-releases"></div>
-      </div>
+      <div id="playfield">
+        <!-- The rival waits in its cage until a key sets it loose. -->
+        <div id="cage" aria-label="The rival, caged">
+          <img id="cage-bird" alt="" />
+          <img id="cage-bars" alt="" />
+          <img id="cage-lock" alt="" />
+        </div>
 
-      <div id="banner-layer" aria-live="polite"></div>
+        <!-- Collection meter: art layer, with the fill drawn by the engine. -->
+        <div id="meter">
+          <div class="meter-channel"><div class="meter-fill" id="meter-fill"></div></div>
+          <img id="meter-art" alt="" />
+          <div class="meter-releases" id="meter-releases"></div>
+        </div>
+
+        <div id="stage"></div>
+
+        <div id="banner-layer" aria-live="polite"></div>
+      </div>
 
       <footer id="hud-bottom">
         <div class="money">
@@ -53,6 +62,8 @@
         </div>
 
         <div class="controls">
+          <button type="button" id="buy" class="rail">Buy</button>
+
           <div class="bet">
             <button type="button" id="bet-down" aria-label="Decrease bet">−</button>
             <div class="bet-value">
@@ -67,8 +78,7 @@
           <div class="extras">
             <button type="button" id="turbo" class="toggle" aria-pressed="false">Turbo</button>
             <button type="button" id="auto" class="toggle" aria-pressed="false">Auto</button>
-            <button type="button" id="buy">Buy</button>
-            <button type="button" id="info">Info</button>
+            <button type="button" id="info" class="rail">Info</button>
           </div>
         </div>
       </footer>

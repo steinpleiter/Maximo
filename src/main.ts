@@ -6,12 +6,14 @@ import { Game } from './game';
  * every symbol falls back to a legible placeholder), then start the game.
  */
 async function boot(): Promise<void> {
-  const { loaded, skipped } = await loadAssets();
+  const report = await loadAssets();
   if (import.meta.env.DEV) {
     console.info(
-      `[maximo] ${loaded} texture(s) loaded, ${skipped} using placeholders. ` +
-        'Point src/assets/manifest.json at your own files to replace them.',
+      `[maximo] ${report.loaded} texture(s) from the art pack, ` +
+        `${report.placeholders} drawn as placeholders. ` +
+        'Map more keys in src/assets/manifest.json — see ASSETS.md.',
     );
+    for (const problem of report.missing) console.warn(`[maximo] ${problem}`);
   }
 
   const game = new Game();

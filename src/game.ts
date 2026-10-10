@@ -10,6 +10,7 @@ import { playEvent, type AnimatorHooks } from './render/animators';
 import { GameStage } from './render/app';
 import { setSpeed } from './render/tween';
 import { DebugPanel, type AutoAnswer } from './render/ui/debug';
+import { applyChrome, setCageOpen } from './render/ui/chrome';
 import { Hud } from './render/ui/hud';
 import { Panels } from './render/ui/panels';
 import { QuizModal } from './render/ui/quizModal';
@@ -65,6 +66,7 @@ export class Game {
   }
 
   async start(): Promise<void> {
+    applyChrome();
     await this.stage.init(required('stage'));
     this.loadSession();
 
@@ -192,6 +194,7 @@ export class Game {
     }
 
     this.busy = true;
+    setCageOpen(this.engine.state.bandit.released);
     this.stage.board.wake();
     this.hud.setBusy(true);
     this.balance -= cost;
@@ -280,6 +283,7 @@ export class Game {
       addWin: (_amount, total) => this.hud.setWin(total * this.bet),
       banner: (text, tone) => this.hud.banner(text, tone),
       setBonus: (drops, isSuper) => this.hud.setBonus(drops, isSuper),
+      setCageOpen: (open) => setCageOpen(open),
     };
   }
 }

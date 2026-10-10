@@ -1,5 +1,5 @@
-import { Container, Graphics, Sprite, Text, TextStyle } from 'pixi.js';
-import { CELL_SIZE, keyForCell, textureFor } from './assets';
+import { Container, Graphics, Sprite, Text, TextStyle, type Texture } from 'pixi.js';
+import { CELL_SIZE, boundsFor, keyForCell, textureFor } from './assets';
 import type { Cell, GemColor, SymbolKind } from '../math/types';
 
 export const GEM_TINTS: Record<GemColor, number> = {
@@ -93,14 +93,81 @@ export class SymbolView extends Container {
   }
 }
 
+/**
+ * A sprite scaled and centred on its *visible* pixels rather than its canvas.
+ *
+ * The pack ships padded square PNGs, so going by canvas size would make each
+ * sprite a different visual weight depending on how much empty space it was
+ * drawn with. The art pack measures the alpha box for exactly this reason.
+ */
+function texturedSprite(key: string, texture: Texture, target: number): Sprite {
+  const sprite = new Sprite(texture);
+  const box = boundsFor(key);
+
+  if (box && box.w > 0 && box.h > 0) {
+    sprite.anchor.set(
+      (box.x + box.w / 2) / texture.width,
+      (box.y + box.h / 2) / texture.height,
+    );
+    sprite.scale.set(target / Math.max(box.w, box.h));
+  } else {
+    sprite.anchor.set(0.5);
+    sprite.scale.set(target / Math.max(texture.width, texture.height));
+  }
+
+  return sprite;
+}
+
+/**
+ * The upgrade level, as a row of pips under the gem.
+ *
+ * The art pack has one gem per colour, not seven, so the level has to be shown
+ * by the engine — and it has to be legible at a glance mid-cascade, because it
+ * is the difference between a 0.02x gem and a 2.70x one.
+ */
+function levelPips(level: number, width: number, y: number): Container {
+  const box = new Container();
+  if (level <= 1) return box;
+
+  const count = Math.min(level, 7);
+  const spacing = width * 0.13;
+  const startX = -((count - 1) * spacing) / 2;
+
+  const backing = new Graphics();
+  backing.roundRect(startX - spacing * 0.55, y - spacing * 0.42, (count - 1) * spacing + spacing * 1.1, spacing * 0.84, spacing * 0.42);
+  backing.fill({ color: 0x120d0a, alpha: 0.72 });
+
+  const pips = new Graphics();
+  for (let i = 0; i < count; i++) pips.circle(startX + i * spacing, y, width * 0.036);
+  pips.fill({ color: level >= 6 ? AMBER : SAND, alpha: 0.95 });
+
+  box.addChild(backing, pips);
+  return box;
+}
+
 function buildArt(cell: Cell, gemLevels: Record<GemColor, number>, key: string): Container {
   const texture = textureFor(key);
+
   if (texture) {
-    const sprite = new Sprite(texture);
-    sprite.anchor.set(0.5);
-    const scale = (CELL_SIZE * 0.92) / Math.max(sprite.texture.width, sprite.texture.height);
-    sprite.scale.set(scale);
-    return sprite;
+    const box = new Container();
+
+    if (cell.kind === 'gem') {
+      const level = gemLevels[cell.color as GemColor] ?? 1;
+      box.addChild(texturedSprite(key, texture, S * 0.78));
+      box.addChild(levelPips(level, S * 0.78, S * 0.4));
+      return box;
+    }
+
+    // Characters carry the scene, so they are allowed to fill more of a cell.
+    const target = cell.kind === 'bird' || cell.kind === 'bandit' ? S * 0.98 : S * 0.84;
+    box.addChild(texturedSprite(key, texture, target));
+
+    if (cell.kind === 'coin') box.addChild(coinValueBadge(cell.coinValue ?? 0));
+    if (cell.kind === 'upgrade' || cell.kind === 'upgradeAll') {
+      box.addChild(stepsBadge(cell.upgradeSteps ?? 1));
+    }
+
+    return box;
   }
 
   switch (cell.kind) {
@@ -281,6 +348,39 @@ function specialPlaceholder(kind: SymbolKind, badge?: string): Container {
     box.addChild(pill, badgeText);
   }
 
+  return box;
+}
+
+/** The coin's value, drawn over whatever art the coin uses. */
+function coinValueBadge(value: number): Container {
+  const box = new Container();
+  const text = new Text({
+    text: value >= 1000 ? `${value / 1000}k` : `${value}`,
+    style: labelStyle(S * 0.24, 0x3a2405),
+  });
+  text.anchor.set(0.5);
+
+  const plate = new Graphics();
+  plate.roundRect(-S * 0.17, S * 0.16, S * 0.34, S * 0.2, S * 0.1);
+  plate.fill({ color: SAND, alpha: 0.95 });
+  text.position.set(0, S * 0.26);
+
+  box.addChild(plate, text);
+  return box;
+}
+
+/** The +1/+2/+3 an upgrade symbol grants. */
+function stepsBadge(steps: number): Container {
+  const box = new Container();
+  const pill = new Graphics();
+  pill.roundRect(S * 0.1, -S * 0.42, S * 0.3, S * 0.22, S * 0.11);
+  pill.fill({ color: SAND });
+
+  const text = new Text({ text: `+${steps}`, style: labelStyle(S * 0.17, INK) });
+  text.anchor.set(0.5);
+  text.position.set(S * 0.25, -S * 0.31);
+
+  box.addChild(pill, text);
   return box;
 }
 

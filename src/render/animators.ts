@@ -14,6 +14,8 @@ export interface AnimatorHooks {
   addWin(amount: number, total: number): void;
   banner(text: string, tone?: 'good' | 'bad'): void;
   setBonus(drops: number | null, isSuper: boolean): void;
+  /** The rival is out of its cage (or back in it). */
+  setCageOpen(open: boolean): void;
 }
 
 const AMBER = 0xe9a33a;
@@ -184,14 +186,16 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
     }
 
     case 'banditRelease':
-      hooks.banner('The bandit is loose', 'bad');
+      hooks.setCageOpen(true);
+      hooks.banner('The rival is loose', 'bad');
       await board.ring(ev.pos.r, ev.pos.c, RED, 180);
       return;
 
     case 'banditDuelResult':
       if (ev.banditWon) {
-        hooks.banner('The bandit wins that one', 'bad');
+        hooks.banner('The rival wins that one', 'bad');
       } else {
+        hooks.setCageOpen(false);
         hooks.banner(`Loot recovered: ${ev.payout.toFixed(2)}x`, 'good');
       }
       await delay(200);

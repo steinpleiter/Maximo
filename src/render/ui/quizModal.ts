@@ -1,5 +1,6 @@
 import type { QuizPrompt } from '../../math/types';
 import { delay } from '../tween';
+import { portraitFor } from './chrome';
 
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -33,7 +34,11 @@ export class QuizModal {
       panel.setAttribute('aria-label', 'Duel question');
 
       const duelists = prompt.duelists
-        .map((d) => `<span class="duelist ${d.isBandit ? 'bandit' : d.color}"></span>`)
+        .map((d) => {
+          const art = portraitFor(d.color, d.isBandit);
+          const style = art ? ` style="background-image:url('${art}')"` : '';
+          return `<span class="duelist ${d.isBandit ? 'bandit' : d.color}"${style}></span>`;
+        })
         .join('<span class="duel-vs">vs</span>');
 
       panel.innerHTML = `
