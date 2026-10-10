@@ -19,13 +19,14 @@ export function releaseBandit(state: GameState, rng: Rng): GameEvent | null {
   if (candidates.length === 0) return null;
 
   const pos = rng.pick(candidates);
-  state.grid[pos.r][pos.c] = newCell(state, 'bandit');
+  const cell = newCell(state, 'bandit');
+  state.grid[pos.r][pos.c] = cell;
   state.bandit.released = true;
   state.bandit.carried = 0;
   state.bandit.birdsBeaten = 0;
   state.bandit.beaten = { blue: false, green: false, purple: false, red: false };
 
-  return { t: 'banditRelease', pos };
+  return { t: 'banditRelease', pos, cell };
 }
 
 export function banditOnGrid(state: GameState): Pos | null {
@@ -115,6 +116,7 @@ export function resolveBanditDuel(
     payout = state.bandit.carried;
     events.push({
       t: 'banditDuelResult',
+      birdId: bird.id,
       birdColor: bird.color,
       banditWon: false,
       payout,
@@ -133,7 +135,13 @@ export function resolveBanditDuel(
       }
     }
 
-    events.push({ t: 'banditDuelResult', birdColor: bird.color, banditWon: true, payout: 0 });
+    events.push({
+      t: 'banditDuelResult',
+      birdId: bird.id,
+      birdColor: bird.color,
+      banditWon: true,
+      payout: 0,
+    });
 
     triggersCoinGame = GEM_COLORS.every((color: GemColor) => state.bandit.beaten[color]);
   }

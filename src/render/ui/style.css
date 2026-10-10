@@ -4,8 +4,8 @@
  * wrapping inside WebGL.
  *
  * Layout follows the collector-slot convention: painted scene behind a framed
- * board, a collection meter across the top, the caged rival off to one side,
- * and money readouts along the bottom bar.
+ * board, the caged rival off to one side, and money readouts along the bottom
+ * bar.
  */
 
 :root {
@@ -27,13 +27,6 @@
 
   --radius: 12px;
   --shadow: 0 14px 40px rgb(0 0 0 / 55%);
-
-  /* Where the usable channel sits inside the meter artwork, as percentages of
-     the image. Tune these if the meter art is replaced. */
-  --meter-left: 10.5%;
-  --meter-right: 24%;
-  --meter-top: 44%;
-  --meter-bottom: 38%;
 
   color-scheme: dark;
 }
@@ -102,14 +95,27 @@ button.toggle[aria-pressed='true'] {
   background: var(--ink) center / cover no-repeat;
 }
 
-/* Keeps symbols readable over a bright painted scene. */
+/* Push the painted scene toward saturated, sunlit colour. */
+#backdrop {
+  filter: saturate(1.75) brightness(1.18) contrast(1.08);
+}
+
+/*
+ * A light colour wash rather than a dark veil: warm light from the top, a
+ * magenta/violet glow at the sides. The board draws its own dark panel, so the
+ * scene itself no longer needs dimming to keep symbols legible. Only the bars
+ * get a thin shade, for the HUD text.
+ */
 #backdrop-shade {
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse at 50% 45%, rgb(8 5 16 / 35%) 0%, rgb(8 5 16 / 72%) 70%),
-    linear-gradient(180deg, rgb(8 5 16 / 70%) 0%, rgb(8 5 16 / 20%) 30%, rgb(8 5 16 / 78%) 100%);
+    radial-gradient(ellipse at 50% -10%, rgb(255 214 120 / 38%) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 60%, rgb(255 70 170 / 30%) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 60%, rgb(120 80 255 / 30%) 0%, transparent 50%),
+    linear-gradient(180deg, rgb(8 5 16 / 35%) 0%, transparent 14%, transparent 86%, rgb(8 5 16 / 40%) 100%);
+  mix-blend-mode: screen;
 }
 
 /* --- top bar ------------------------------------------------------------- */
@@ -181,6 +187,16 @@ button.toggle[aria-pressed='true'] {
   gap: 0.9rem;
 }
 
+/* Glass cards, so readouts stay legible over the bright scene. */
+.readouts,
+.money {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgb(13 10 20 / 78%);
+  backdrop-filter: blur(6px);
+}
+
 .readout {
   display: flex;
   flex-direction: column;
@@ -210,14 +226,12 @@ button.toggle[aria-pressed='true'] {
   position: relative;
   min-height: 0;
   display: grid;
-  /* The meter takes its own row so it sits above the board rather than over
-     the top row of symbols. */
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   justify-items: center;
 }
 
 #stage {
-  grid-row: 2;
+  grid-row: 1;
   position: relative;
   width: 100%;
   min-height: 0;
@@ -285,80 +299,6 @@ button.toggle[aria-pressed='true'] {
   50% {
     transform: rotate(2.2deg);
   }
-}
-
-/* Collection meter: artwork on top, fill behind it in the channel. */
-#meter {
-  grid-row: 1;
-  position: relative;
-  width: min(54%, 560px);
-  aspect-ratio: 2172 / 724;
-  margin-bottom: -2.2%;
-  z-index: 3;
-  pointer-events: none;
-  filter: drop-shadow(0 8px 18px rgb(0 0 0 / 60%));
-}
-
-#meter-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  z-index: 2;
-}
-
-#meter-art:not([src]) {
-  display: none;
-}
-
-.meter-channel {
-  position: absolute;
-  left: var(--meter-left);
-  right: var(--meter-right);
-  top: var(--meter-top);
-  bottom: var(--meter-bottom);
-  z-index: 1;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgb(8 6 12 / 85%);
-}
-
-/* With no meter art loaded the channel has to read on its own. */
-#meter-art:not([src]) ~ .meter-channel,
-#meter:not(:has(#meter-art[src])) .meter-channel {
-  left: 0;
-  right: 0;
-  top: 35%;
-  bottom: 35%;
-  border: 1px solid var(--line);
-}
-
-.meter-fill {
-  height: 100%;
-  width: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--gold-deep), var(--gold) 70%, #ffe9a8);
-  box-shadow: 0 0 14px rgb(242 177 52 / 70%);
-  transition: width 260ms ease;
-}
-
-.meter-releases {
-  position: absolute;
-  right: 2%;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 0.2rem;
-  z-index: 3;
-}
-
-.release-pip {
-  width: 9px;
-  height: 9px;
-  border-radius: 3px;
-  background: var(--gold);
-  box-shadow: 0 0 9px rgb(242 177 52 / 80%);
 }
 
 /* --- bottom bar ---------------------------------------------------------- */
@@ -789,16 +729,92 @@ table.paytable thead th {
   opacity: 0.75;
 }
 
+/* --- wide screens --------------------------------------------------------- */
+
+/*
+ * In landscape the bars move into side columns, so the board gets the full
+ * window height instead of sharing it with a top and bottom bar.
+ */
+@media (min-aspect-ratio: 7/5) and (min-width: 900px) {
+  #app {
+    grid-template-columns: minmax(180px, 1fr) minmax(0, 3fr) minmax(180px, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    padding-block: 0.4rem;
+  }
+
+  #playfield {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  #hud-top,
+  #hud-bottom {
+    grid-row: 1;
+    z-index: 4;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0.9rem;
+  }
+
+  #hud-top {
+    grid-column: 1;
+    align-self: start;
+    align-items: flex-start;
+  }
+
+  #title-emblem {
+    height: clamp(64px, 13vh, 120px);
+  }
+
+  #hud-bottom {
+    grid-column: 3;
+    align-self: end;
+    align-items: flex-end;
+  }
+
+  .levels {
+    flex-wrap: wrap;
+  }
+
+  .money {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    text-align: right;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+  }
+
+  .bet {
+    justify-content: space-between;
+  }
+
+  .extras {
+    justify-content: flex-end;
+  }
+
+  #cage {
+    top: 34%;
+  }
+
+  #debug-layer {
+    right: auto;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    align-items: flex-start;
+  }
+}
+
 /* --- small screens ------------------------------------------------------- */
 
 @media (max-width: 760px) {
   #cage {
     width: 74px;
     top: 0;
-  }
-
-  #meter {
-    width: 78%;
   }
 
   .readouts {

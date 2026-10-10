@@ -16,13 +16,11 @@ export interface HudCallbacks {
 }
 
 /**
- * The DOM chrome around the canvas: money, bet, the gem-level chips, the
- * collection meter, banners and the button row.
+ * The DOM chrome around the canvas: money, bet, the gem-level chips, banners
+ * and the button row.
  */
 export class Hud {
   private readonly levels = el('levels');
-  private readonly meterFill = el('meter-fill');
-  private readonly meterReleases = el('meter-releases');
   private readonly bannerLayer = el('banner-layer');
 
   private readonly valueBalance = el('value-balance');
@@ -111,20 +109,6 @@ export class Hud {
     if (number) number.textContent = String(to);
     chip.classList.add('bumped');
     setTimeout(() => chip.classList.remove('bumped'), 900);
-  }
-
-  setMeter(value: number, size: number): void {
-    const pct = size === 0 ? 0 : Math.min(100, (value / size) * 100);
-    this.meterFill.style.width = `${pct}%`;
-  }
-
-  setReleases(count: number): void {
-    this.meterReleases.replaceChildren();
-    for (let i = 0; i < count; i++) {
-      const pip = document.createElement('span');
-      pip.className = 'release-pip';
-      this.meterReleases.appendChild(pip);
-    }
   }
 
   setBonus(drops: number | null, isSuper: boolean): void {

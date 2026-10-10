@@ -172,7 +172,6 @@ export class Game {
     this.hud.setBalance(this.balance);
     this.hud.setBet(this.bet);
     this.hud.setLevels(this.engine.state.gemLevels);
-    this.hud.setMeter(this.engine.state.meter, DEFAULT_CONFIG.meter.size);
     this.hud.setQuizStats(this.stats.data.correct, this.stats.data.asked, this.stats.data.streak);
   }
 
@@ -236,7 +235,9 @@ export class Game {
       for (const event of step.value.events) {
         await playEvent(event, hooks);
       }
-      this.hud.setReleases(this.engine.state.pendingReleases);
+      // The engine's grid is the truth; never let a misread event leave two
+      // symbols stacked in one cell.
+      this.stage.board.reconcile(snapshot(this.engine.state), this.engine.state.gemLevels);
 
       if (step.value.quiz) {
         const chosen = await this.askQuiz(step.value.quiz);
@@ -278,8 +279,6 @@ export class Game {
       refit: () => this.stage.fit(),
       setLevels: (levels: Record<GemColor, number>) => this.hud.setLevels(levels),
       bumpLevel: (color, to) => this.hud.bumpLevel(color, to),
-      setMeter: (value, size) => this.hud.setMeter(value, size),
-      setReleases: (count) => this.hud.setReleases(count),
       addWin: (_amount, total) => this.hud.setWin(total * this.bet),
       banner: (text, tone) => this.hud.banner(text, tone),
       setBonus: (drops, isSuper) => this.hud.setBonus(drops, isSuper),

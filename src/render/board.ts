@@ -12,7 +12,7 @@ const GAP = CELL_SIZE * 0.06;
  * It has to clear the track frame's thickness (see FRAME_SCALE), or the rails
  * would sit on top of the first row and column.
  */
-const PAD = CELL_SIZE * 0.58;
+const PAD = CELL_SIZE * 0.46;
 
 /**
  * Texture pixels to board pixels for the frame art.
@@ -21,7 +21,7 @@ const PAD = CELL_SIZE * 0.58;
  * runs stretch. Corners render at native size, so the whole thing is drawn
  * oversized and scaled down by this factor to land at a sane track thickness.
  */
-const FRAME_SCALE = 0.34;
+const FRAME_SCALE = 0.27;
 const FRAME_CORNER = 330;
 
 /**
@@ -39,6 +39,13 @@ export class Board extends Container {
   private readonly bgLayer = new Container();
   private readonly cellLayer = new Container();
   private readonly symbolLayer = new Container();
+  /** Gems and specials, inside the symbol layer. */
+  private readonly itemLayer = new Container();
+  /**
+   * Birds and the bandit ride above everything else, so a collector that is
+   * scaled up or walking through a cell is never drawn underneath a gem.
+   */
+  private readonly collectorLayer = new Container();
   private readonly fxLayer = new Container();
   /** The track frame sits above the symbols, so they ride behind the rails. */
   private readonly frameLayer = new Container();
@@ -48,9 +55,12 @@ export class Board extends Container {
   private readonly where = new Map<number, Pos>();
   private gemLevels: Record<GemColor, number> = { blue: 1, green: 1, purple: 1, red: 1 };
   private trainCells: Pos[] = [];
+  /** Collectors currently lifted for a duel stand-off. */
+  private readonly highlighted = new Set<number>();
 
   constructor() {
     super();
+    this.symbolLayer.addChild(this.itemLayer, this.collectorLayer);
     this.addChild(this.bgLayer, this.cellLayer, this.symbolLayer, this.fxLayer, this.frameLayer);
   }
 
@@ -87,7 +97,7 @@ export class Board extends Container {
     // A translucent panel so symbols stay readable over the painted backdrop.
     const panel = new Graphics();
     panel.roundRect(PAD * 0.45, PAD * 0.45, this.boardWidth - PAD * 0.9, this.boardHeight - PAD * 0.9, PAD * 0.7);
-    panel.fill({ color: 0x120d1c, alpha: 0.55 });
+    panel.fill({ color: 0x120d1c, alpha: 0.82 });
     this.bgLayer.addChild(panel);
 
     const frameTexture = textureFor('board.frame');
@@ -174,7 +184,9 @@ export class Board extends Container {
     for (const view of this.views.values()) view.destroy({ children: true });
     this.views.clear();
     this.where.clear();
-    this.symbolLayer.removeChildren();
+    this.highlighted.clear();
+    this.itemLayer.removeChildren();
+    this.collectorLayer.removeChildren();
 
     for (const { r, c, cell } of cells) {
       if (cell) this.place(r, c, cell);
@@ -187,7 +199,8 @@ export class Board extends Container {
     view.position.set(x, y);
     this.views.set(cell.id, view);
     this.where.set(cell.id, { r, c });
-    this.symbolLayer.addChild(view);
+    const isCollector = cell.kind === 'bird' || cell.kind === 'bandit';
+    (isCollector ? this.collectorLayer : this.itemLayer).addChild(view);
     return view;
   }
 
@@ -196,7 +209,52 @@ export class Board extends Container {
     if (!view) return;
     this.views.delete(cellId);
     this.where.delete(cellId);
+    this.highlighted.delete(cellId);
     view.destroy({ children: true });
+  }
+
+  /** The view of the loose bandit, if one is on the board. */
+  banditId(): number {
+    for (const view of this.views.values()) {
+      if (view.kind === 'bandit') return view.cellId;
+    }
+    return -1;
+  }
+
+  /**
+   * Snaps the board to the engine's grid.
+   *
+   * The animators follow the event tape, and any event they misread would
+   * otherwise leave a stale view behind for the next refill to land on top
+   * of. Run after each batch, this guarantees one view per cell: missing
+   * views are placed, strays are dropped, and anything out of place or still
+   * mid-tween is put back at rest.
+   */
+  reconcile(cells: CellSnapshot[], levels: Record<GemColor, number>): void {
+    this.setLevels(levels);
+    const live = new Set<number>();
+
+    for (const { r, c, cell } of cells) {
+      if (!cell) continue;
+      live.add(cell.id);
+
+      const view = this.views.get(cell.id);
+      if (!view) {
+        this.place(r, c, cell);
+        continue;
+      }
+
+      view.render(cell, this.gemLevels);
+      const { x, y } = this.cellToPoint(r, c);
+      view.position.set(x, y);
+      view.alpha = 1;
+      if (!this.highlighted.has(cell.id)) view.scale.set(1);
+      this.where.set(cell.id, { r, c });
+    }
+
+    for (const id of [...this.views.keys()]) {
+      if (!live.has(id)) this.remove(id);
+    }
   }
 
   /**
@@ -306,9 +364,16 @@ export class Board extends Container {
   async highlight(cellId: number, on: boolean): Promise<void> {
     const view = this.views.get(cellId);
     if (!view) return;
+    if (on) this.highlighted.add(cellId);
+    else this.highlighted.delete(cellId);
     const target = on ? 1.18 : 1;
     const start = view.scale.x;
     await tween(140, (t) => view.scale.set(lerp(start, target, t)), easeOutBack);
+  }
+
+  /** Settles every lifted collector back to its normal size. */
+  async clearHighlights(): Promise<void> {
+    await Promise.all([...this.highlighted].map((id) => this.highlight(id, false)));
   }
 
   /** A ring marking a cell — used for the duel stand-off and blasts. */

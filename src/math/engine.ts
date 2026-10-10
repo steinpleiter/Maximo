@@ -539,12 +539,17 @@ export class Engine {
         coinGameOwed = false;
         coinGamePlayed = true;
         // Sweep the board so the lassos have somewhere to land.
+        const swept: Pos[] = [];
         for (let r = 0; r < state.rows; r++) {
           for (let c = 0; c < state.cols; c++) {
             const cell = state.grid[r][c];
-            if (cell && cell.kind !== 'bird' && cell.kind !== 'bandit') state.grid[r][c] = null;
+            if (cell && cell.kind !== 'bird' && cell.kind !== 'bandit') {
+              state.grid[r][c] = null;
+              swept.push({ r, c });
+            }
           }
         }
+        if (swept.length > 0) emit({ t: 'sweep', cells: swept });
         const game = runCoinGame(state, cfg, rng);
         addWin(game.win);
         emit(game.event);

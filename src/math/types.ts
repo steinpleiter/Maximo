@@ -153,11 +153,19 @@ export type GameEvent =
   | { t: 'duelFizzle' }
   /** Collectors repositioned themselves — after a duel, or to break a deadlock. */
   | { t: 'collectorMove'; moves: { from: Pos; to: Pos }[] }
-  | { t: 'banditDuelResult'; birdColor: GemColor | null; banditWon: boolean; payout: number }
+  | {
+      t: 'banditDuelResult';
+      birdId: number;
+      birdColor: GemColor | null;
+      banditWon: boolean;
+      payout: number;
+    }
   | { t: 'switcheroo'; a: Pos; b: Pos }
-  | { t: 'banditRelease'; pos: Pos }
+  | { t: 'banditRelease'; pos: Pos; cell: Cell }
   | { t: 'dynamite'; pos: Pos; destroyed: Pos[] }
   | { t: 'gridExpand'; cols: number; rows: number }
+  /** Ordinary symbols cleared off the board to make room for the Coin Game. */
+  | { t: 'sweep'; cells: Pos[] }
   | { t: 'trainHeist'; birdId: number; laps: number; awarded: CellSnapshot[] }
   | {
       t: 'coinGame';
