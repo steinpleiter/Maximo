@@ -9,8 +9,6 @@ export interface AnimatorHooks {
   refit(): void;
   setLevels(levels: Record<GemColor, number>): void;
   bumpLevel(color: GemColor, to: number): void;
-  setMeter(value: number, size: number): void;
-  setReleases(count: number): void;
   addWin(amount: number, total: number): void;
   banner(text: string, tone?: 'good' | 'bad'): void;
   setBonus(drops: number | null, isSuper: boolean): void;
@@ -36,7 +34,6 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       board.resize(ev.cols, ev.rows, ev.trainCells);
       hooks.refit();
       hooks.setLevels(ev.gemLevels);
-      hooks.setMeter(ev.meter, ev.meterSize);
       board.sync([], ev.gemLevels);
 
       // Rain the whole board in, column by column, so a fresh drop reads.
@@ -117,12 +114,10 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       return;
 
     case 'meter':
-      hooks.setMeter(ev.value, ev.size);
       return;
 
     case 'meterRelease':
       hooks.banner('Feature release', 'good');
-      hooks.setReleases(0);
       await stagger(ev.cells, 70, async (snap) => {
         if (!snap.cell) return;
         board.remove(board.idAt(snap.r, snap.c));
@@ -148,7 +143,7 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
 
     case 'quizAnswered':
       hooks.banner(ev.correct ? 'Correct — showdown!' : 'Wrong — they stand down', ev.correct ? 'good' : 'bad');
-      await board.dim(false);
+      await all([board.dim(false), board.clearHighlights()]);
       return;
 
     case 'showdown': {
@@ -188,17 +183,27 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
     case 'banditRelease':
       hooks.setCageOpen(true);
       hooks.banner('The rival is loose', 'bad');
-      await board.ring(ev.pos.r, ev.pos.c, RED, 180);
+      // The bandit lands on top of whatever was there, replacing it.
+      await board.pop(board.idAt(ev.pos.r, ev.pos.c), 140);
+      await all([board.dropIn(ev.pos.r, ev.pos.c, ev.cell, 1.2), board.ring(ev.pos.r, ev.pos.c, RED, 180)]);
       return;
 
     case 'banditDuelResult':
       if (ev.banditWon) {
         hooks.banner('The rival wins that one', 'bad');
+        // The beaten bird is out for the rest of the round.
+        await board.pop(ev.birdId, 220);
       } else {
         hooks.setCageOpen(false);
         hooks.banner(`Loot recovered: ${ev.payout.toFixed(2)}x`, 'good');
+        // Back to the cage.
+        await board.pop(board.banditId(), 220);
       }
       await delay(200);
+      return;
+
+    case 'sweep':
+      await all(ev.cells.map((pos) => board.pop(board.idAt(pos.r, pos.c), 140)));
       return;
 
     case 'dynamite':

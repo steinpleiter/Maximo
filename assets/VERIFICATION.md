@@ -15,3 +15,8 @@ Three distinct source-photo gems are saved and visually checked: gem-red-v3, gem
 
 ## Neighbourhood daytime addition
 The new 1536 × 1024 opaque background was visually inspected against the supplied photograph. The main street and canal layout, right-side brick apartment block, foreground tree, containers, portable toilet and police van are retained. Bright daytime lighting and green foliage are intentional changes. Current pack: 24 generated assets and one pending purple gem. Preview file references and the refreshed ZIP are checked locally; browser rendering remains unverified.
+
+## Final purple gem — 10 October 2026
+The new gem was visually inspected against the silver-hat photo, selecting the man on the right. Its transparent alpha and visible bounds were measured. All seven purple gem texture keys now reference gem-purple-v4.png. Historical pending notes above are superseded.
+
+CLI integration checks: all seven purple texture keys resolve to the new file, its metadata records genuine alpha, and npm run build passes (TypeScript plus Vite). The production output includes the purple PNG. Browser rendering was not checked in this revision.

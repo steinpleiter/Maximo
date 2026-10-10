@@ -27,10 +27,10 @@ This is a starter image pack with neutral character poses, not an animated sprit
 The active prompts are in `prompts/jobs.json` and `prompts/jobs-v5.json`; previous prompt sets are retained for history. They record the style and identity references used by the built-in image tool. The local `references/` folder is required to regenerate the pack; private source photos are excluded from the downloadable ZIP. The manifest is an audit of the PNG files, not a claim that game behavior has been implemented.
 
 ## Photographic gem revision
-Red uses the original cream-shirt laughing photo; blue uses the original DJ photo; green uses the new pool selfie (front-left man). Each uses a distinct original source photograph with photographic facial texture inside the approved faceted gem treatment. Purple is awaiting a fourth distinct source photo and appears as a placeholder in the active preview. The older ZIP is the completed v2 pack, not this pending photo revision.
+Red uses the original cream-shirt laughing photo; blue uses the original DJ photo; green uses the new pool selfie (front-left man). Each uses a distinct original source photograph with photographic facial texture inside the approved faceted gem treatment. Purple uses the smiling man on the right wearing a silver sequined hat in the newly supplied photo. All four colours now use four distinct source photographs.
 
 ## Neighbourhood daytime background
-The new `background-neighbourhood-day-v1.png` uses the supplied street photograph for its composition and Pirots 3 references for painted game-art rendering. Bright midday light, blue sky and green foliage replace the original overcast appearance. It is the default preview background. The current content ZIP contains 24 ready assets; purple remains pending.
+The new `background-neighbourhood-day-v1.png` uses the supplied street photograph for its composition and Pirots 3 references for painted game-art rendering. Bright midday light, blue sky and green foliage replace the original overcast appearance. It is the default preview background. The purple photographic gem is complete and connected to all seven purple gem levels in the game.
 
 ## Repository package
 PNG paths in the manifest, preview, and prompts are relative to this assets folder. Original source photos and historical image variants are excluded. The packaged preview is static and can be opened locally.

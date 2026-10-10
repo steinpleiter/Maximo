@@ -3,7 +3,7 @@ import type { GemColor } from '../../math/types';
 
 /**
  * Dresses the DOM chrome with the art pack: painted backdrop, title emblem,
- * the caged rival and the collection meter.
+ * and the caged rival.
  *
  * Every piece is optional. A key with no art simply leaves its element empty,
  * and the CSS hides image elements that never received a `src`, so the game
@@ -20,7 +20,6 @@ export function applyChrome(): void {
   setImage('cage-bird', urlFor('bandit'));
   setImage('cage-bars', urlFor('ui.cage'));
   setImage('cage-lock', urlFor('ui.padlock'));
-  setImage('meter-art', urlFor('ui.meter'));
 }
 
 /** Greys out the cage once the rival is loose on the board. */
