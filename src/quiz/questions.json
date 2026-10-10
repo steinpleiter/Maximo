@@ -1,0 +1,587 @@
+[
+  {
+    "id": "geo-001",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "answer": 2
+  },
+  {
+    "id": "geo-002",
+    "category": "Geography",
+    "difficulty": 2,
+    "question": "Which river flows through Vienna?",
+    "options": ["Rhine", "Danube", "Elbe", "Seine"],
+    "answer": 1
+  },
+  {
+    "id": "geo-003",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "Which is the largest hot desert on Earth?",
+    "options": ["Sahara", "Gobi", "Kalahari", "Arabian"],
+    "answer": 0
+  },
+  {
+    "id": "geo-004",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Montreal", "Ottawa"],
+    "answer": 3
+  },
+  {
+    "id": "geo-005",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "Which is the longest river in Africa?",
+    "options": ["Congo", "Nile", "Zambezi", "Niger"],
+    "answer": 1
+  },
+  {
+    "id": "geo-006",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "What is the capital of Brazil?",
+    "options": ["Rio de Janeiro", "Sao Paulo", "Brasilia", "Salvador"],
+    "answer": 2
+  },
+  {
+    "id": "geo-007",
+    "category": "Geography",
+    "difficulty": 2,
+    "question": "Mount Everest sits on the border of Nepal and which country?",
+    "options": ["India", "China", "Bhutan", "Pakistan"],
+    "answer": 1
+  },
+  {
+    "id": "geo-008",
+    "category": "Geography",
+    "difficulty": 1,
+    "question": "Which is the largest ocean on Earth?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "answer": 3
+  },
+  {
+    "id": "geo-009",
+    "category": "Geography",
+    "difficulty": 2,
+    "question": "Which country is home to the city of Marrakesh?",
+    "options": ["Tunisia", "Egypt", "Morocco", "Algeria"],
+    "answer": 2
+  },
+  {
+    "id": "geo-010",
+    "category": "Geography",
+    "difficulty": 3,
+    "question": "Which is the world's smallest country by area?",
+    "options": ["Monaco", "Vatican City", "San Marino", "Nauru"],
+    "answer": 1
+  },
+  {
+    "id": "sci-001",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Ag", "Go", "Au", "Gd"],
+    "answer": 2
+  },
+  {
+    "id": "sci-002",
+    "category": "Science",
+    "difficulty": 2,
+    "question": "How many bones are in the adult human body?",
+    "options": ["186", "206", "226", "246"],
+    "answer": 1
+  },
+  {
+    "id": "sci-003",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Mercury"],
+    "answer": 1
+  },
+  {
+    "id": "sci-004",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "Which gas do plants absorb from the air for photosynthesis?",
+    "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+    "answer": 2
+  },
+  {
+    "id": "sci-005",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "Which is the hardest naturally occurring substance?",
+    "options": ["Quartz", "Diamond", "Titanium", "Granite"],
+    "answer": 1
+  },
+  {
+    "id": "sci-006",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "Which is the largest planet in the solar system?",
+    "options": ["Saturn", "Neptune", "Jupiter", "Uranus"],
+    "answer": 2
+  },
+  {
+    "id": "sci-007",
+    "category": "Science",
+    "difficulty": 2,
+    "question": "What does DNA stand for?",
+    "options": [
+      "Deoxyribonucleic acid",
+      "Dinucleic acid",
+      "Deoxyribose nucleotide",
+      "Diribonucleic acid"
+    ],
+    "answer": 0
+  },
+  {
+    "id": "sci-008",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "Which element has the chemical symbol Fe?",
+    "options": ["Lead", "Iron", "Fluorine", "Tin"],
+    "answer": 1
+  },
+  {
+    "id": "sci-009",
+    "category": "Science",
+    "difficulty": 2,
+    "question": "Which organelle is known as the powerhouse of the cell?",
+    "options": ["Nucleus", "Ribosome", "Mitochondrion", "Golgi body"],
+    "answer": 2
+  },
+  {
+    "id": "sci-010",
+    "category": "Science",
+    "difficulty": 1,
+    "question": "How many chambers does the human heart have?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "answer": 2
+  },
+  {
+    "id": "sci-011",
+    "category": "Science",
+    "difficulty": 2,
+    "question": "Roughly how fast does light travel in a vacuum?",
+    "options": ["300 km/s", "3,000 km/s", "30,000 km/s", "300,000 km/s"],
+    "answer": 3
+  },
+  {
+    "id": "sci-012",
+    "category": "Science",
+    "difficulty": 3,
+    "question": "What is the most abundant gas in Earth's atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Argon", "Carbon dioxide"],
+    "answer": 1
+  },
+  {
+    "id": "his-001",
+    "category": "History",
+    "difficulty": 1,
+    "question": "Who was the first President of the United States?",
+    "options": ["Thomas Jefferson", "John Adams", "George Washington", "Benjamin Franklin"],
+    "answer": 2
+  },
+  {
+    "id": "his-002",
+    "category": "History",
+    "difficulty": 1,
+    "question": "In which year did the Second World War end?",
+    "options": ["1943", "1944", "1945", "1946"],
+    "answer": 2
+  },
+  {
+    "id": "his-003",
+    "category": "History",
+    "difficulty": 1,
+    "question": "Who was the first person to walk on the Moon?",
+    "options": ["Buzz Aldrin", "Yuri Gagarin", "Neil Armstrong", "Michael Collins"],
+    "answer": 2
+  },
+  {
+    "id": "his-004",
+    "category": "History",
+    "difficulty": 2,
+    "question": "In which year did the Berlin Wall fall?",
+    "options": ["1987", "1989", "1991", "1993"],
+    "answer": 1
+  },
+  {
+    "id": "his-005",
+    "category": "History",
+    "difficulty": 2,
+    "question": "In which year did the Titanic sink?",
+    "options": ["1905", "1912", "1918", "1923"],
+    "answer": 1
+  },
+  {
+    "id": "his-006",
+    "category": "History",
+    "difficulty": 2,
+    "question": "Who discovered penicillin?",
+    "options": ["Louis Pasteur", "Alexander Fleming", "Edward Jenner", "Robert Koch"],
+    "answer": 1
+  },
+  {
+    "id": "his-007",
+    "category": "History",
+    "difficulty": 3,
+    "question": "In which year was the Magna Carta sealed?",
+    "options": ["1066", "1215", "1348", "1415"],
+    "answer": 1
+  },
+  {
+    "id": "his-008",
+    "category": "History",
+    "difficulty": 2,
+    "question": "Which ancient wonder still stands in Egypt today?",
+    "options": [
+      "Hanging Gardens of Babylon",
+      "Colossus of Rhodes",
+      "Great Pyramid of Giza",
+      "Lighthouse of Alexandria"
+    ],
+    "answer": 2
+  },
+  {
+    "id": "his-009",
+    "category": "History",
+    "difficulty": 2,
+    "question": "Julius Caesar was a ruler of which empire?",
+    "options": ["Greek", "Roman", "Ottoman", "Persian"],
+    "answer": 1
+  },
+  {
+    "id": "his-010",
+    "category": "History",
+    "difficulty": 3,
+    "question": "Which civilisation built Machu Picchu?",
+    "options": ["Aztec", "Maya", "Inca", "Olmec"],
+    "answer": 2
+  },
+  {
+    "id": "flm-001",
+    "category": "Film & TV",
+    "difficulty": 1,
+    "question": "Who directed the 1975 film Jaws?",
+    "options": ["George Lucas", "Steven Spielberg", "Ridley Scott", "Martin Scorsese"],
+    "answer": 1
+  },
+  {
+    "id": "flm-002",
+    "category": "Film & TV",
+    "difficulty": 1,
+    "question": "In The Matrix, which colour pill does Neo swallow?",
+    "options": ["Blue", "Green", "Red", "White"],
+    "answer": 2
+  },
+  {
+    "id": "flm-003",
+    "category": "Film & TV",
+    "difficulty": 2,
+    "question": "Which film made the line \"Here's Johnny!\" famous?",
+    "options": ["Psycho", "The Shining", "Taxi Driver", "The Exorcist"],
+    "answer": 1
+  },
+  {
+    "id": "flm-004",
+    "category": "Film & TV",
+    "difficulty": 1,
+    "question": "Who played Jack in the 1997 film Titanic?",
+    "options": ["Brad Pitt", "Leonardo DiCaprio", "Matt Damon", "Johnny Depp"],
+    "answer": 1
+  },
+  {
+    "id": "flm-005",
+    "category": "Film & TV",
+    "difficulty": 2,
+    "question": "Who directed Pulp Fiction?",
+    "options": ["Quentin Tarantino", "Robert Rodriguez", "Coen Brothers", "David Fincher"],
+    "answer": 0
+  },
+  {
+    "id": "flm-006",
+    "category": "Film & TV",
+    "difficulty": 1,
+    "question": "Which animated film features a rat who dreams of becoming a chef?",
+    "options": ["Finding Nemo", "Ratatouille", "Up", "Monsters, Inc."],
+    "answer": 1
+  },
+  {
+    "id": "flm-007",
+    "category": "Film & TV",
+    "difficulty": 2,
+    "question": "In which fictional kingdom is Frozen set?",
+    "options": ["Arendelle", "Corona", "Genovia", "Far Far Away"],
+    "answer": 0
+  },
+  {
+    "id": "mus-001",
+    "category": "Music",
+    "difficulty": 1,
+    "question": "How many strings does a standard guitar have?",
+    "options": ["Four", "Five", "Six", "Seven"],
+    "answer": 2
+  },
+  {
+    "id": "mus-002",
+    "category": "Music",
+    "difficulty": 2,
+    "question": "Who composed the symphony containing \"Ode to Joy\"?",
+    "options": ["Mozart", "Beethoven", "Bach", "Brahms"],
+    "answer": 1
+  },
+  {
+    "id": "mus-003",
+    "category": "Music",
+    "difficulty": 1,
+    "question": "Which band recorded \"Bohemian Rhapsody\"?",
+    "options": ["The Who", "Queen", "Led Zeppelin", "Pink Floyd"],
+    "answer": 1
+  },
+  {
+    "id": "mus-004",
+    "category": "Music",
+    "difficulty": 2,
+    "question": "How many keys does a standard full-size piano have?",
+    "options": ["76", "82", "88", "92"],
+    "answer": 2
+  },
+  {
+    "id": "mus-005",
+    "category": "Music",
+    "difficulty": 2,
+    "question": "Which Beatle played bass guitar?",
+    "options": ["John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"],
+    "answer": 1
+  },
+  {
+    "id": "spt-001",
+    "category": "Sport",
+    "difficulty": 1,
+    "question": "How many players does a football team have on the pitch?",
+    "options": ["Nine", "Ten", "Eleven", "Twelve"],
+    "answer": 2
+  },
+  {
+    "id": "spt-002",
+    "category": "Sport",
+    "difficulty": 1,
+    "question": "Which sport is played with a shuttlecock?",
+    "options": ["Squash", "Badminton", "Table tennis", "Padel"],
+    "answer": 1
+  },
+  {
+    "id": "spt-003",
+    "category": "Sport",
+    "difficulty": 1,
+    "question": "How many years are there between Summer Olympic Games?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "answer": 2
+  },
+  {
+    "id": "spt-004",
+    "category": "Sport",
+    "difficulty": 1,
+    "question": "In tennis, what is a score of zero called?",
+    "options": ["Nil", "Love", "Duck", "Blank"],
+    "answer": 1
+  },
+  {
+    "id": "spt-005",
+    "category": "Sport",
+    "difficulty": 1,
+    "question": "How many holes are played in a full round of golf?",
+    "options": ["Nine", "Twelve", "Eighteen", "Twenty-one"],
+    "answer": 2
+  },
+  {
+    "id": "spt-006",
+    "category": "Sport",
+    "difficulty": 3,
+    "question": "In which sport would you perform a Fosbury Flop?",
+    "options": ["Diving", "High jump", "Gymnastics", "Pole vault"],
+    "answer": 1
+  },
+  {
+    "id": "lit-001",
+    "category": "Literature",
+    "difficulty": 1,
+    "question": "Who wrote the novel 1984?",
+    "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "H. G. Wells"],
+    "answer": 1
+  },
+  {
+    "id": "lit-002",
+    "category": "Literature",
+    "difficulty": 1,
+    "question": "Who wrote Pride and Prejudice?",
+    "options": ["Charlotte Bronte", "Jane Austen", "Emily Bronte", "Mary Shelley"],
+    "answer": 1
+  },
+  {
+    "id": "lit-003",
+    "category": "Literature",
+    "difficulty": 2,
+    "question": "Who created the detective Sherlock Holmes?",
+    "options": ["Agatha Christie", "Arthur Conan Doyle", "Wilkie Collins", "G. K. Chesterton"],
+    "answer": 1
+  },
+  {
+    "id": "lit-004",
+    "category": "Literature",
+    "difficulty": 3,
+    "question": "Which novel opens with the line \"Call me Ishmael\"?",
+    "options": ["Moby-Dick", "Treasure Island", "The Old Man and the Sea", "Robinson Crusoe"],
+    "answer": 0
+  },
+  {
+    "id": "lit-005",
+    "category": "Literature",
+    "difficulty": 1,
+    "question": "Who wrote Romeo and Juliet?",
+    "options": ["Christopher Marlowe", "William Shakespeare", "Ben Jonson", "John Donne"],
+    "answer": 1
+  },
+  {
+    "id": "fod-001",
+    "category": "Food & Drink",
+    "difficulty": 1,
+    "question": "What is the main ingredient in guacamole?",
+    "options": ["Courgette", "Avocado", "Pea", "Broad bean"],
+    "answer": 1
+  },
+  {
+    "id": "fod-002",
+    "category": "Food & Drink",
+    "difficulty": 2,
+    "question": "Which spice is the most expensive by weight?",
+    "options": ["Vanilla", "Cardamom", "Saffron", "Cinnamon"],
+    "answer": 2
+  },
+  {
+    "id": "fod-003",
+    "category": "Food & Drink",
+    "difficulty": 2,
+    "question": "Which nut is the main ingredient of marzipan?",
+    "options": ["Hazelnut", "Almond", "Walnut", "Cashew"],
+    "answer": 1
+  },
+  {
+    "id": "fod-004",
+    "category": "Food & Drink",
+    "difficulty": 2,
+    "question": "Which country did tempura cooking originate from as a technique?",
+    "options": ["Japan", "Portugal", "China", "Thailand"],
+    "answer": 1
+  },
+  {
+    "id": "tec-001",
+    "category": "Technology",
+    "difficulty": 1,
+    "question": "What does CPU stand for?",
+    "options": [
+      "Central Processing Unit",
+      "Computer Power Unit",
+      "Core Processing Utility",
+      "Central Program Unit"
+    ],
+    "answer": 0
+  },
+  {
+    "id": "tec-002",
+    "category": "Technology",
+    "difficulty": 2,
+    "question": "Who co-founded Apple alongside Steve Jobs and Ronald Wayne?",
+    "options": ["Bill Gates", "Steve Wozniak", "Paul Allen", "Tim Cook"],
+    "answer": 1
+  },
+  {
+    "id": "tec-003",
+    "category": "Technology",
+    "difficulty": 2,
+    "question": "What does HTTP stand for?",
+    "options": [
+      "HyperText Transfer Protocol",
+      "High Transfer Text Protocol",
+      "HyperText Transmission Process",
+      "Host Transfer Text Protocol"
+    ],
+    "answer": 0
+  },
+  {
+    "id": "tec-004",
+    "category": "Technology",
+    "difficulty": 1,
+    "question": "Which two digits does the binary system use?",
+    "options": ["1 and 2", "0 and 1", "0 and 9", "1 and 10"],
+    "answer": 1
+  },
+  {
+    "id": "tec-005",
+    "category": "Technology",
+    "difficulty": 1,
+    "question": "What does RAM stand for?",
+    "options": [
+      "Rapid Access Memory",
+      "Random Access Memory",
+      "Readable Active Memory",
+      "Runtime Allocated Memory"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "gen-001",
+    "category": "General",
+    "difficulty": 1,
+    "question": "How many sides does a hexagon have?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 1
+  },
+  {
+    "id": "gen-002",
+    "category": "General",
+    "difficulty": 1,
+    "question": "Mixing blue and yellow paint gives which colour?",
+    "options": ["Purple", "Orange", "Green", "Brown"],
+    "answer": 2
+  },
+  {
+    "id": "gen-003",
+    "category": "General",
+    "difficulty": 2,
+    "question": "How many minutes are there in a full day?",
+    "options": ["1,200", "1,440", "1,680", "2,400"],
+    "answer": 1
+  },
+  {
+    "id": "gen-004",
+    "category": "General",
+    "difficulty": 1,
+    "question": "What is the currency of Japan?",
+    "options": ["Won", "Yuan", "Yen", "Ringgit"],
+    "answer": 2
+  },
+  {
+    "id": "gen-005",
+    "category": "General",
+    "difficulty": 2,
+    "question": "How many degrees are there in a circle?",
+    "options": ["180", "270", "360", "480"],
+    "answer": 2
+  },
+  {
+    "id": "gen-006",
+    "category": "General",
+    "difficulty": 3,
+    "question": "A group of crows is collectively known as a what?",
+    "options": ["Pack", "Murder", "Flock", "Gaggle"],
+    "answer": 1
+  }
+]
