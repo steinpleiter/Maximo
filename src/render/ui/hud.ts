@@ -1,4 +1,6 @@
 import { GEM_COLORS, type GemColor } from '../../math/types';
+import { getSpeed } from '../tween';
+import { urlFor } from '../assets';
 
 const el = <T extends HTMLElement>(id: string): T => {
   const found = document.getElementById(id);
@@ -39,6 +41,8 @@ export class Hud {
 
   private readonly chips = new Map<GemColor, HTMLElement>();
   private bonusDrops: number | null = null;
+  private displayedWin = 0;
+  private winFrame = 0;
 
   constructor(private readonly callbacks: HudCallbacks) {
     this.buildLevelChips();
@@ -67,6 +71,14 @@ export class Hud {
       const chip = document.createElement('div');
       chip.className = 'level-chip';
       chip.innerHTML = `<span class="level-dot ${color}"></span><span class="level-number">1</span>`;
+      const art = urlFor(`gem.${color}.1`);
+      if (art) {
+        const icon = document.createElement('img');
+        icon.src = art;
+        icon.alt = `${color} gem level`;
+        icon.className = 'level-icon';
+        chip.firstElementChild?.replaceWith(icon);
+      }
       this.levels.appendChild(chip);
       this.chips.set(color, chip);
     }
@@ -79,7 +91,21 @@ export class Hud {
   }
 
   setWin(value: number): void {
-    this.valueWin.textContent = money(value);
+    cancelAnimationFrame(this.winFrame);
+    const from = this.displayedWin;
+    if (value === 0 || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.displayedWin = value;
+      this.valueWin.textContent = money(value);
+      return;
+    }
+    const start = performance.now();
+    const draw = (now: number) => {
+      const t = Math.min(1, (now - start) / (380 / getSpeed()));
+      this.displayedWin = from + (value - from) * (1 - (1 - t) ** 3);
+      this.valueWin.textContent = money(this.displayedWin);
+      if (t < 1) this.winFrame = requestAnimationFrame(draw);
+    };
+    this.winFrame = requestAnimationFrame(draw);
   }
 
   setBet(value: number): void {

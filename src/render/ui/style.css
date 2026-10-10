@@ -361,6 +361,23 @@ button.toggle[aria-pressed='true'] {
   gap: 0.4rem;
 }
 
+#audio-controls {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  z-index: 90;
+  display: flex;
+  gap: 4px;
+  font-size: 11px;
+}
+#audio-controls button { min-height: 32px; padding: 5px 9px; }
+.audio-volume { position: relative; }
+.audio-volume summary { cursor: pointer; list-style: none; padding: 5px 9px; min-height: 32px; border: 1px solid var(--line); border-radius: 9px; background: #171226ed; }
+.audio-volume summary::-webkit-details-marker { display: none; }
+.audio-volume label { position: absolute; right: 0; top: 38px; display: grid; gap: 8px; width: 165px; padding: 12px; border: 1px solid var(--line); border-radius: 9px; background: #171226f5; }
+.audio-volume input { width: 100%; accent-color: var(--gold); }
+@media (max-aspect-ratio: 7/5), (max-width: 899px) { #hud-top { padding-right: 108px; } }
+
 /* --- banners ------------------------------------------------------------- */
 
 #banner-layer {

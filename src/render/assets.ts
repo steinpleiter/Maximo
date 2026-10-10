@@ -14,7 +14,7 @@ export const CELL_SIZE: number = manifest.cellSize ?? 96;
  * Every PNG in the art pack, as a bundled URL. Vite resolves the glob at build
  * time, so files get hashed names in production and no copy step is needed.
  */
-const FILES = import.meta.glob('/assets/*.png', {
+const FILES = import.meta.glob('/assets/**/*.{png,svg}', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -102,6 +102,12 @@ export function urlFor(key: string): string | null {
   return file ? (FILES[`/assets/${file}`] ?? null) : null;
 }
 
+/** Only select baked-in denominations when they match the engine exactly. */
+export function keyForCoin(value: number): string {
+  const variant = `special.coin.${value}`;
+  return KEYS[variant] ? variant : 'special.coin';
+}
+
 /** The manifest key for a cell as it currently stands. */
 export function keyForCell(cell: Cell, gemLevels: Record<GemColor, number>): string {
   switch (cell.kind) {
@@ -111,6 +117,13 @@ export function keyForCell(cell: Cell, gemLevels: Record<GemColor, number>): str
       return `bird.${cell.color}`;
     case 'bandit':
       return 'bandit';
+    case 'coin':
+      return keyForCoin(cell.coinValue ?? 0);
+    case 'upgrade':
+    case 'upgradeAll': {
+      const variant = `special.${cell.kind}.${cell.upgradeSteps ?? 1}`;
+      return KEYS[variant] ? variant : `special.${cell.kind}`;
+    }
     default:
       return `special.${cell.kind as SymbolKind}`;
   }

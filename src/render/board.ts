@@ -1,7 +1,7 @@
-import { Container, Graphics, NineSliceSprite } from 'pixi.js';
+import { Container, Graphics, NineSliceSprite, Text } from 'pixi.js';
 import { CELL_SIZE, textureFor } from './assets';
-import { GEM_TINTS, SymbolView } from './symbols';
-import { easeInCubic, easeOutBack, easeOutCubic, lerp, tween } from './tween';
+import { GEM_TINTS, SymbolView, texturedSprite } from './symbols';
+import { delay, easeInCubic, easeOutBack, easeOutCubic, lerp, linear, tween } from './tween';
 import type { Cell, CellSnapshot, GemColor, Pos } from '../math/types';
 
 const GAP = CELL_SIZE * 0.06;
@@ -295,6 +295,133 @@ export class Board extends Container {
 
   // --- primitives ----------------------------------------------------------
 
+  /** The supplied sparkle blooms at a pickup, with a short spray of facets. */
+  async collectSparkle(pos: Pos, color = 0xffd268, ms = 350): Promise<void> {
+    const point = this.cellToPoint(pos.r, pos.c);
+    const effect = new Container();
+    effect.position.set(point.x, point.y);
+    this.fxLayer.addChild(effect);
+    const texture = textureFor('effect.collect');
+    const flare = texture ? texturedSprite('effect.collect', texture, CELL_SIZE * 1.4) : null;
+    if (flare) { flare.tint = color; effect.addChild(flare); }
+    const particles = new Graphics();
+    effect.addChild(particles);
+    await tween(ms, (t) => {
+      particles.clear();
+      for (let i = 0; i < 10; i++) {
+        const angle = i * Math.PI * 2 / 10;
+        const distance = CELL_SIZE * (0.12 + t * (0.5 + (i % 3) * 0.12));
+        const x = Math.cos(angle) * distance, y = Math.sin(angle) * distance;
+        const radius = (1 - t) * (i % 2 ? 4 : 6);
+        particles.poly([x, y - radius, x + radius, y, x, y + radius, x - radius, y]).fill({ color });
+      }
+      if (flare) { flare.alpha = Math.sin(t * Math.PI); flare.rotation = t * 0.45; }
+      effect.alpha = 1 - t * 0.7;
+    }, linear);
+    effect.destroy({ children: true });
+  }
+
+  /** Exact engine multiplier, floating up independently of the persistent HUD. */
+  async floatingPayout(pos: Pos, value: number, color = 0xffdd77): Promise<void> {
+    if (value <= 0) return;
+    const { x, y } = this.cellToPoint(pos.r, pos.c);
+    const text = new Text({
+      text: `+${value.toLocaleString('nl-NL', { maximumFractionDigits: 2 })}×`,
+      style: { fontFamily: 'Georgia, serif', fontSize: CELL_SIZE * 0.28, fontWeight: 'bold', fill: color,
+        stroke: { color: 0x251208, width: 4 }, dropShadow: { color: 0x000000, blur: 5, distance: 2 } },
+    });
+    text.anchor.set(0.5);
+    this.fxLayer.addChild(text);
+    await tween(650, (t) => {
+      text.position.set(x, y - CELL_SIZE * (0.15 + t * 0.75));
+      text.scale.set(1 + Math.sin(Math.min(1, t * 3) * Math.PI) * 0.18);
+      text.alpha = Math.min(1, (1 - t) * 4);
+    }, linear);
+    text.destroy();
+  }
+
+  /** A fuse flash, hot centre, fire petals and flying embers for dynamite. */
+  async dynamiteBlast(pos: Pos): Promise<void> {
+    const { x, y } = this.cellToPoint(pos.r, pos.c);
+    const effect = new Container();
+    effect.position.set(x, y);
+    this.fxLayer.addChild(effect);
+    const fire = new Graphics();
+    effect.addChild(fire);
+    const texture = textureFor('special.bigDynamite');
+    const bundle = texture ? texturedSprite('special.bigDynamite', texture, CELL_SIZE) : null;
+    if (bundle) effect.addChild(bundle);
+    await tween(170, (t) => {
+      effect.scale.set(1 + t * 0.3);
+      effect.rotation = Math.sin(t * Math.PI * 6) * 0.07;
+    }, linear);
+    bundle?.destroy();
+    effect.rotation = 0;
+    await Promise.all([this.shake(340), tween(480, (t) => {
+      fire.clear();
+      const radius = CELL_SIZE * (0.1 + t * 1.5);
+      for (let i = 0; i < 9; i++) {
+        const angle = i * Math.PI * 2 / 9;
+        fire.circle(Math.cos(angle) * radius * 0.6, Math.sin(angle) * radius * 0.6, radius * 0.42)
+          .fill({ color: i % 2 ? 0xff8628 : 0xffc64b, alpha: (1 - t) * 0.8 });
+      }
+      fire.circle(0, 0, radius * 0.55).fill({ color: 0xfff3bc, alpha: 1 - t });
+      for (let i = 0; i < 18; i++) {
+        const angle = i * Math.PI * 2 / 18;
+        const distance = radius * (1 + (i % 4) * 0.12);
+        fire.circle(Math.cos(angle) * distance, Math.sin(angle) * distance + t * t * 30, (1 - t) * 5)
+          .fill({ color: 0xffd373, alpha: 1 - t });
+      }
+    }, linear)]);
+    effect.destroy({ children: true });
+  }
+
+  /** A sealed bag flips into the actual denomination or illustrated scorpion. */
+  async coinPick(pos: Pos, kind: 'coin' | 'scorpion', value: number): Promise<void> {
+    const { x, y } = this.cellToPoint(pos.r, pos.c);
+    const holder = new Container();
+    holder.position.set(x, y);
+    this.fxLayer.addChild(holder);
+    const bagTexture = textureFor('coinGame.bag');
+    const bag = bagTexture ? texturedSprite('coinGame.bag', bagTexture, CELL_SIZE * 0.88) : new Graphics();
+    holder.addChild(bag);
+    await tween(150, (t) => { holder.scale.set(1 + Math.sin(t * Math.PI) * 0.22); holder.rotation = Math.sin(t * Math.PI * 4) * 0.09; }, linear);
+    holder.rotation = 0;
+    await tween(100, (t) => holder.scale.x = 1 - t, linear);
+    bag.destroy();
+    if (kind === 'coin') holder.addChild(new SymbolView({ id: -1, kind: 'coin', coinValue: value }, this.gemLevels));
+    else {
+      const scorpion = textureFor('coinGame.scorpion');
+      if (scorpion) holder.addChild(texturedSprite('coinGame.scorpion', scorpion, CELL_SIZE * 0.94));
+    }
+    await tween(150, (t) => holder.scale.set(t, 1 + Math.sin(t * Math.PI) * 0.18), easeOutBack);
+    await Promise.all([this.collectSparkle(pos, kind === 'coin' ? 0xffd76c : 0xe47451), kind === 'coin' ? this.floatingPayout(pos, value) : this.shake(180)]);
+    await delay(100);
+    await tween(160, (t) => { holder.alpha = 1 - t; holder.position.y = y - t * 12; });
+    holder.destroy({ children: true });
+  }
+
+  /** Features fall out of the meter in golden arcs toward their board cells. */
+  async meterBurst(cells: CellSnapshot[]): Promise<void> {
+    const effect = new Graphics();
+    this.fxLayer.addChild(effect);
+    const origin = { x: this.boardWidth / 2, y: -CELL_SIZE * 0.2 };
+    await tween(420, (t) => {
+      effect.clear();
+      for (const { r, c } of cells) {
+        const target = this.cellToPoint(r, c);
+        for (let trail = 0; trail < 5; trail++) {
+          const progress = Math.max(0, t - trail * 0.035);
+          const x = lerp(origin.x, target.x, progress);
+          const y = lerp(origin.y, target.y, progress) - Math.sin(progress * Math.PI) * CELL_SIZE;
+          effect.circle(x, y, 6 - trail).fill({ color: 0xffd26b, alpha: (1 - trail / 5) * Math.min(1, (1 - t) * 6) });
+        }
+      }
+    }, linear);
+    effect.destroy();
+    await Promise.all(cells.map((cell) => this.collectSparkle(cell)));
+  }
+
   /** Drops a symbol in from above its final cell. */
   async dropIn(r: number, c: number, cell: Cell, distance = 3): Promise<void> {
     const view = this.place(r, c, cell);
@@ -429,24 +556,55 @@ export class Board extends Container {
     g.destroy();
   }
 
-  /** The travelling-train flourish for a heist. */
+  /** A locomotive follows the board rails, trailing steam and a gold carriage. */
   async trainSweep(): Promise<void> {
-    const g = new Graphics();
-    const y = this.boardHeight / 2;
-    this.fxLayer.addChild(g);
-
-    await tween(
-      520,
-      (t) => {
-        const x = lerp(-CELL_SIZE, this.boardWidth + CELL_SIZE, t);
-        g.clear();
-        g.roundRect(x - CELL_SIZE * 0.9, y - CELL_SIZE * 0.3, CELL_SIZE * 1.8, CELL_SIZE * 0.6, 10);
-        g.fill({ color: 0x3a2a14, alpha: 0.95 });
-        g.stroke({ width: 2, color: 0xb9761b });
-      },
-      easeInOutQuadLocal,
-    );
-    g.destroy();
+    const layer = new Container();
+    this.frameLayer.addChild(layer);
+    const steam = new Graphics();
+    const locomotive = new Container();
+    const body = new Graphics();
+    body.roundRect(-39, -19, 38, 38, 4).fill({ color: 0x563b25 }).stroke({ width: 3, color: 0xe2ad50 });
+    body.roundRect(-5, -15, 40, 30, 8).fill({ color: 0x383d43 }).stroke({ width: 3, color: 0xad9672 });
+    body.rect(-29, -12, 17, 23).fill({ color: 0xffd77d });
+    body.rect(12, -23, 13, 46).fill({ color: 0x202731 }).stroke({ width: 2, color: 0xbd9960 });
+    body.poly([35, -22, 47, 0, 35, 22]).fill({ color: 0xb35d32 }).stroke({ width: 2, color: 0xf0bd6a });
+    body.circle(32, 0, 7).fill({ color: 0xffefb0 });
+    // The carriage carries visible coins, instead of an unlabelled block.
+    body.roundRect(-100, -18, 49, 36, 3).fill({ color: 0x75502c }).stroke({ width: 3, color: 0xe4af52 });
+    for (let i = 0; i < 5; i++) body.circle(-88 + (i % 3) * 12, -6 + Math.floor(i / 3) * 14, 7).fill({ color: 0xf7c34b }).stroke({ width: 1, color: 0xffe593 });
+    body.moveTo(-51, 0).lineTo(-40, 0).stroke({ width: 4, color: 0xd5b67c });
+    const wheels = new Graphics();
+    locomotive.addChild(body, wheels);
+    layer.addChild(steam, locomotive);
+    const inset = PAD * 0.4;
+    const width = this.boardWidth - inset * 2, height = this.boardHeight - inset * 2;
+    const perimeter = (width + height) * 2;
+    const along = (progress: number) => {
+      let distance = ((progress % 1 + 1) % 1) * perimeter;
+      if (distance < width) return { x: inset + distance, y: inset, angle: 0 };
+      distance -= width;
+      if (distance < height) return { x: inset + width, y: inset + distance, angle: Math.PI / 2 };
+      distance -= height;
+      if (distance < width) return { x: inset + width - distance, y: inset + height, angle: Math.PI };
+      return { x: inset, y: inset + height - (distance - width), angle: -Math.PI / 2 };
+    };
+    await tween(1500, (t) => {
+      const head = along(t);
+      locomotive.position.set(head.x, head.y);
+      locomotive.rotation = head.angle;
+      wheels.clear();
+      for (const x of [-88, -62, -28, 4, 26]) for (const y of [-21, 21]) {
+        wheels.circle(x, y, 6).fill({ color: 0x22232b }).stroke({ color: 0xd8b268, width: 2 });
+        wheels.moveTo(x, y).lineTo(x + Math.cos(t * 80) * 5, y + Math.sin(t * 80) * 5).stroke({ color: 0xf9d68b, width: 1 });
+      }
+      steam.clear();
+      for (let i = 1; i <= 7; i++) {
+        const point = along(t - i * 0.009);
+        steam.circle(point.x, point.y - i * 3, 4 + i * 2).fill({ color: 0xe8dcc9, alpha: (1 - i / 8) * 0.35 });
+      }
+      layer.alpha = Math.min(1, t * 12, (1 - t) * 12);
+    }, linear);
+    layer.destroy({ children: true });
   }
 
   /** Dims the board while a quiz is up. */
@@ -476,6 +634,3 @@ export class Board extends Container {
     return color ? GEM_TINTS[color] : 0xe2614f;
   }
 }
-
-const easeInOutQuadLocal = (t: number): number =>
-  t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;

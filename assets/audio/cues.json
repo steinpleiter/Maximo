@@ -1,0 +1,388 @@
+{
+  "version": 1,
+  "method": "Silence boundaries (-45 dB, gaps >=300 ms), visual STFT inspection, and local LAION CLAP zero-shot audio/text similarity. Event roles inferred; not original publisher cue names.",
+  "confidenceNote": "Cosine similarity is a ranking score, not a calibrated probability. All semantic identities remain inferred; train is tentative.",
+  "cues": {
+    "button": {
+      "file": "button.mp3",
+      "source": "effects003.mp3",
+      "segmentId": "effects003_052",
+      "start": 187.8785,
+      "duration": 0.4638,
+      "gain": 0.3,
+      "confidence": "medium",
+      "label": "Mechanical click",
+      "evidence": "Very short broadband onset, rapid decay; local CLAP top match is mechanical click.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A sharp click or mechanical button switch.",
+            "cosine": 0.5348
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.3617
+          },
+          {
+            "label": "A video game cash register or coins jingling and clinking.",
+            "cosine": 0.3039
+          }
+        ]
+      }
+    },
+    "spin": {
+      "file": "spin.mp3",
+      "source": "effects003.mp3",
+      "segmentId": "effects003_016",
+      "start": 63.7043,
+      "duration": 0.2037,
+      "gain": 0.38,
+      "confidence": "medium",
+      "label": "Short whoosh",
+      "evidence": "Brief noise burst with a pitch contour; top CLAP match is air swoosh with a substantial margin.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A whoosh of air or fast swoosh movement.",
+            "cosine": 0.581
+          },
+          {
+            "label": "A high pitched slide whistle or cartoon pitch bend.",
+            "cosine": 0.3053
+          },
+          {
+            "label": "A sharp click or mechanical button switch.",
+            "cosine": 0.2738
+          }
+        ]
+      }
+    },
+    "land": {
+      "file": "land.mp3",
+      "source": "effects000.mp3",
+      "segmentId": "effects000_029",
+      "start": 104.7632,
+      "duration": 0.6427,
+      "gain": 0.26,
+      "confidence": "medium",
+      "label": "Landing thud",
+      "evidence": "Short broadband transient with strongest energy in low frequencies; top CLAP match is thud/wooden knock.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A short low thud, wooden knock or object landing.",
+            "cosine": 0.5267
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.4413
+          },
+          {
+            "label": "A gun being fired with a loud sharp gunshot.",
+            "cosine": 0.3379
+          }
+        ]
+      }
+    },
+    "collect": {
+      "file": "collect.mp3",
+      "source": "effects002.mp3",
+      "segmentId": "effects002_028",
+      "start": 89.0745,
+      "duration": 0.6325,
+      "gain": 0.34,
+      "confidence": "medium",
+      "label": "Bright gem chime",
+      "evidence": "Short pitched onset and decaying horizontal partials; CLAP ranks bright chime above coin.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A short bright electronic ding or bell chime for collecting a gem in a video game.",
+            "cosine": 0.4816
+          },
+          {
+            "label": "A video game cash register or coins jingling and clinking.",
+            "cosine": 0.4522
+          },
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.443
+          }
+        ]
+      }
+    },
+    "coin": {
+      "file": "coin.mp3",
+      "source": "effects002.mp3",
+      "segmentId": "effects002_024",
+      "start": 84.8747,
+      "duration": 0.6586,
+      "gain": 0.37,
+      "confidence": "medium",
+      "label": "Coin-like chime",
+      "evidence": "Short stack of decaying high partials; CLAP ranks coin/cash-register above bright chime.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A video game cash register or coins jingling and clinking.",
+            "cosine": 0.4493
+          },
+          {
+            "label": "A short bright electronic ding or bell chime for collecting a gem in a video game.",
+            "cosine": 0.4209
+          },
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.3909
+          }
+        ]
+      }
+    },
+    "upgrade": {
+      "file": "upgrade.mp3",
+      "source": "effects000.mp3",
+      "segmentId": "effects000_001",
+      "start": 1.4953,
+      "duration": 4.6124,
+      "gain": 0.33,
+      "confidence": "medium",
+      "label": "Power-up flourish",
+      "evidence": "Layered harmonic rise and long musical decay; CLAP strongly favors magical power-up, then fanfare.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.6158
+          },
+          {
+            "label": "A triumphant musical fanfare or celebratory winning jingle.",
+            "cosine": 0.5694
+          },
+          {
+            "label": "A short bright electronic ding or bell chime for collecting a gem in a video game.",
+            "cosine": 0.4697
+          }
+        ]
+      }
+    },
+    "gunshot": {
+      "file": "gunshot.mp3",
+      "source": "effects002.mp3",
+      "segmentId": "effects002_054",
+      "start": 150.9142,
+      "duration": 0.5955,
+      "gain": 0.37,
+      "confidence": "medium",
+      "label": "Sharp gunshot",
+      "evidence": "Isolated broadband impulse with short tail; CLAP gunshot clearly above impact.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A gun being fired with a loud sharp gunshot.",
+            "cosine": 0.5913
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.3709
+          },
+          {
+            "label": "A sharp click or mechanical button switch.",
+            "cosine": 0.2896
+          }
+        ]
+      }
+    },
+    "explosion": {
+      "file": "explosion.mp3",
+      "source": "effects001.mp3",
+      "segmentId": "effects001_006",
+      "start": 20.1718,
+      "duration": 3.9655,
+      "gain": 0.42,
+      "confidence": "medium",
+      "label": "Deep explosion",
+      "evidence": "Broadband attack into a long, low-frequency rumbling decay; CLAP explosion then fire crackle.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A dynamite bomb explosion with a deep rumbling blast.",
+            "cosine": 0.5135
+          },
+          {
+            "label": "A fire crackling or fuse sizzling.",
+            "cosine": 0.4595
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.41
+          }
+        ]
+      }
+    },
+    "crash": {
+      "file": "crash.mp3",
+      "source": "effects001.mp3",
+      "segmentId": "effects001_026",
+      "start": 110.075,
+      "duration": 1.4222,
+      "gain": 0.33,
+      "confidence": "medium",
+      "label": "Shattering impact",
+      "evidence": "Dense noisy attack and scattered high-frequency tail; strong CLAP impact/crash match.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.6882
+          },
+          {
+            "label": "A gun being fired with a loud sharp gunshot.",
+            "cosine": 0.4252
+          },
+          {
+            "label": "A metallic clang or bell ringing.",
+            "cosine": 0.2419
+          }
+        ]
+      }
+    },
+    "win": {
+      "file": "win.mp3",
+      "source": "effects002.mp3",
+      "segmentId": "effects002_021",
+      "start": 72.7178,
+      "duration": 4.0813,
+      "gain": 0.35,
+      "confidence": "medium",
+      "label": "Win chime flourish",
+      "evidence": "Layered sustained musical partials with smooth decay; CLAP power-up and fanfare nearly tied.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.5711
+          },
+          {
+            "label": "A triumphant musical fanfare or celebratory winning jingle.",
+            "cosine": 0.5541
+          },
+          {
+            "label": "A short bright electronic ding or bell chime for collecting a gem in a video game.",
+            "cosine": 0.4348
+          }
+        ]
+      }
+    },
+    "bigWin": {
+      "file": "bigWin.mp3",
+      "source": "music000.mp3",
+      "start": 34.0,
+      "duration": 2.85,
+      "gain": 0.48,
+      "confidence": "source-identified",
+      "label": "Original soundtrack musical excerpt",
+      "evidence": "Unpitched excerpt of the user-selected music000 section at 00:34, with only short edge fades. No synthesized audio. Replaces the rejected effects002 bird death cue.",
+      "rejectedSource": {
+        "source": "effects002.mp3",
+        "segmentId": "effects002_018",
+        "start": 58.1416,
+        "duration": 5.0325,
+        "reason": "User identified this as a bird death sound; do not use it for celebrations."
+      }
+    },
+    "bonus": {
+      "file": "bonus.mp3",
+      "source": "effects003.mp3",
+      "segmentId": "effects003_022",
+      "start": 84.7227,
+      "duration": 3.8792,
+      "gain": 0.38,
+      "confidence": "medium",
+      "label": "Bonus fanfare",
+      "evidence": "Sustained harmonic progression and rhythmic attacks; CLAP favors fanfare; app role is inferred.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A triumphant musical fanfare or celebratory winning jingle.",
+            "cosine": 0.3988
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.2598
+          },
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.2399
+          }
+        ]
+      }
+    },
+    "train": {
+      "file": "train.mp3",
+      "source": "effects002.mp3",
+      "segmentId": "effects002_000",
+      "start": 0,
+      "duration": 8.1192,
+      "gain": 0.3,
+      "confidence": "low",
+      "label": "Rhythmic train-like roll",
+      "evidence": "Regular repeated broadband pulses over low rumble; CLAP favors steam train but also scores gunfire. Train identity is tentative.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A steam train blowing its whistle and chugging.",
+            "cosine": 0.4302
+          },
+          {
+            "label": "A gun being fired with a loud sharp gunshot.",
+            "cosine": 0.372
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.2641
+          }
+        ]
+      }
+    },
+    "powerUp": {
+      "file": "powerUp.mp3",
+      "source": "effects003.mp3",
+      "segmentId": "effects003_043",
+      "start": 160.5331,
+      "duration": 3.9723,
+      "gain": 0.32,
+      "confidence": "medium",
+      "label": "Magic shimmer",
+      "evidence": "Dense higher-frequency bands fading in a stepped harmonic tail; CLAP favors magic/power-up over laser.",
+      "classifier": {
+        "model": "laion/clap-htsat-unfused",
+        "topMatches": [
+          {
+            "label": "A short magical rising sparkle sound for a game power up.",
+            "cosine": 0.4871
+          },
+          {
+            "label": "A laser zap or science fiction electronic effect.",
+            "cosine": 0.3822
+          },
+          {
+            "label": "An impact crashing and glass shattering.",
+            "cosine": 0.3125
+          }
+        ]
+      }
+    }
+  }
+}

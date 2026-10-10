@@ -13,6 +13,7 @@ export interface DebugCallbacks {
   onSeed(seed: string): void;
   onAutoAnswer(mode: AutoAnswer): void;
   onReset(): void;
+  onPreview(kind: string): void;
 }
 
 /**
@@ -54,6 +55,9 @@ export class DebugPanel {
       <h3>Force a feature</h3>
       <div class="debug-grid" data-group="force"></div>
 
+      <h3>Animation previews · no wager</h3>
+      <div class="debug-grid" data-group="preview"></div>
+
       <h3>Buy</h3>
       <div class="debug-grid" data-group="buy"></div>
 
@@ -73,6 +77,11 @@ export class DebugPanel {
       { label: 'Bandit', force: { key: true } },
       { label: 'Coin game', force: { coinGame: true } },
     ];
+
+    const previewGroup = this.panel.querySelector('[data-group="preview"]') as HTMLElement;
+    for (const [kind, label] of Object.entries({ small: 'Small win', big: 'Big win', super: 'Super win', mega: 'Mega win', epic: 'Epic win', goldRush: 'Gold Rush', bonus: 'Bonus intro', superBonus: 'Super bonus intro' })) {
+      previewGroup.appendChild(this.button(label, () => this.callbacks.onPreview(kind)));
+    }
 
     const forceGroup = this.panel.querySelector('[data-group="force"]') as HTMLElement;
     for (const entry of forces) {

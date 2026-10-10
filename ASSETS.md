@@ -1,139 +1,107 @@
-# Art
+# Game artwork
 
-The game draws from the **Max Birds** pack in [`assets/`](assets/README.md).
+The renderer combines the original **Max Birds** art in `assets/` with the supplied
+**Pirots 3 Promotion Package** gameplay icons in `assets/icons/`. The Max portrait
+gems, collectors, rival, backgrounds, board frame, meter, cage and title remain
+in use. Promotional screenshots are visual references, not flattened game UI.
 
-Nothing in the code references a file path. Every sprite is looked up by a
-**logical key**, and `src/assets/manifest.json` maps keys to file names inside
-`/assets`. A key mapped to `null` — or to a file that is not in the pack —
-draws a built-in procedural placeholder instead, so a partial art pass still
-runs and the game never fails to boot over a missing image.
+`src/assets/manifest.json` maps logical keys to files. Vite bundles PNG and SVG
+files recursively below `/assets`, including the previously unreachable icons
+folder. The renderer reports missing files on boot. A null key uses procedural
+art; only `board.cell` and `board.trainCell` intentionally remain null.
 
-## How to change a symbol
+## Symbols and variants
 
-1. Put the image in `assets/`.
-2. Point its key at the file name:
-
-```json
-"gem.purple.1": "gem-purple-v4.png"
-```
-
-3. Reload. That is the whole process — no code changes, no copy step. Vite
-   bundles everything matching `/assets/*.png` and hashes it for production.
-
-On a dev boot the console reports how many keys resolved, how many fell back to
-placeholders, and names any file it could not find.
-
-## Sizing and framing
-
-The pack ships padded square canvases — a 1254×1254 PNG whose artwork might only
-occupy the middle 900px. Scaling the whole canvas into a cell would make every
-sprite a different visual weight depending on how much empty space it was drawn
-with.
-
-So sprites are scaled and centred on their **visible alpha box**, read from
-`assets/manifest.json` (`visible_bounds`), which the art pack measures. Keep
-that manifest up to date when adding art and sizing takes care of itself.
-
-Relative to one grid cell, the visible art is drawn at:
-
-| | Share of a cell |
+| Logical key | Artwork |
 | --- | --- |
-| Characters (birds, rival) | 98% |
-| Specials | 84% |
-| Gems | 78% |
+| `gem.<colour>.<1–7>` | Existing Max portrait gem per colour; level pips remain live |
+| `bird.<colour>`, `bandit` | Existing Max Birds characters |
+| `special.wild` | Promotional `Wild.png` |
+| `special.wildBandit` | Promotional `WildBlack.png` |
+| `special.upgrade.<1–3>` | `LevelUp.png`, `LevelUp_2.png`, `LevelUp_3.png` |
+| `special.upgradeAll.<1–3>` | Corresponding `LevelUpAll` variants |
+| `special.coin.<value>` | Exact matching promotional money bag |
+| `special.coin` | Neutral SVG money bag with live denomination |
+| `special.dynamite`, `special.bigDynamite` | `Bomb.png` and `BigBomb.png` |
+| `special.peanut` | Promotional `Peanut.png` |
+| `special.transform` | Promotional `Transform.png` |
+| `special.key` | Promotional `Key.png` |
+| `special.bonus`, `special.superBonus` | Promotional `Bonus.png`, `SuperBonus.png` |
+| `special.crossover`, `special.nest` | Registered promotional artwork; no separate engine symbol kind |
 
-## What the engine draws on top
+The promotional bags have numbers baked into their artwork. Their denominations
+are 2, 5, 10, 25, 50, 100, 500, 1000, 2500 and MAX WIN (the engine's 10000× cap).
+The engine also awards 1, 3, 15, 20, 75 and 250×. These use the neutral bag with
+an exact live value, never a differently numbered promotional image. Baked
+upgrade counts and coin denominations do not receive duplicate value badges.
 
-Some information cannot live in a static image, so it is composited over
-whatever art a key supplies:
+The supplied pack also includes alternative gems, colour-specific wild levels,
+characters and marketing banners. They remain available in the supplied pack;
+they do not replace the Max identities or introduce game rules absent from the
+engine. The game icon copies already in `assets/icons/` are retained.
 
-- **Gem level** — a row of pips under the gem. The pack has one gem per colour,
-  not seven, and the level is the difference between a 0.02x gem and a 2.70x
-  one, so it has to be legible at a glance mid-cascade.
-- **Coin value** — a plate under the coin with its multiplier.
-- **Upgrade steps** — a `+1`/`+2`/`+3` pill in the top-right corner. Keep that
-  corner clear in upgrade art.
+## Sizing
 
-## The keys
+Promotional PNGs have large transparent margins. Every actively mapped PNG's
+alpha bounds are recorded in `assets/manifest.json`; sprites scale and centre
+around those visible pixels, not the padded canvas. Authored SVG effects use
+bounds within their view boxes. Characters occupy 98% of a cell, specials 84%,
+and portrait gems 78%; gem-level pips sit below the portrait.
 
-### Gems — 28 keys
+To add art, copy the file below `assets/`, register its logical key in
+`src/assets/manifest.json`, and record its dimensions and visible bounds in
+`assets/manifest.json`. A valid file path is required even for nested folders.
 
-`gem.<colour>.<level>` for `blue`, `green`, `purple`, `red` and levels `1`–`7`.
-All seven levels of a colour currently point at the same file; the level reads
-from the pips. Point them at distinct files if you ever draw per-level gems.
+## Effects and feature presentations
 
-### Collectors — 5 keys
-
-| Key | Pack file |
+| Key | Use |
 | --- | --- |
-| `bird.blue` | `bird-blue-captain-v2.png` |
-| `bird.green` | `bird-green-explorer-v2.png` |
-| `bird.purple` | `bird-purple-dj-v2.png` |
-| `bird.red` | `bird-red-trickster-v2.png` |
-| `bandit` | `bird-rival-v2.png` — also used for the cage and quiz portraits |
+| `effect.collect` | Original supplied Max sparkle, animated on collections and feature landings |
+| `effect.win` | Original supplied Max sunburst for win presentation |
+| `effect.coin` | New embossed M gold SVG coin for animated showers |
+| `coinGame.bag` | New neutral SVG money bag used before a coin-game reveal |
+| `coinGame.scorpion` | New illustrated SVG scorpion used on a losing reveal |
 
-### Specials — 11 keys
+The promotional package supplies static PNG symbols and screenshot references;
+it does not supply a scorpion, isolated shower coin, standalone locomotive,
+animated sprite sheets or transparent win-title overlays. The neutral bag,
+scorpion and shower coin are intentionally authored SVGs in `assets/effects/`.
+The locomotive is vector art drawn in Pixi. These are application additions,
+not extracted promotional artwork.
 
-| Key | What it does | Art |
-| --- | --- | --- |
-| `special.wild` | Stands in for any gem | horseshoe |
-| `special.peanut` | Fills a gap so a bird can cross | jar |
-| `special.bonus` | Scatter | inactive skull |
-| `special.superBonus` | Scatter that upgrades the bonus to Super | gold skull |
-| `special.wildBandit` | Wild paying as the top gem | *placeholder* |
-| `special.upgrade` | Upgrades one colour by 1–3 levels | *placeholder* |
-| `special.upgradeAll` | Upgrades all four colours | *placeholder* |
-| `special.coin` | Instant win, value drawn over it | *placeholder* |
-| `special.dynamite` | Explodes and grows the grid | *placeholder* |
-| `special.transform` | Repaints neighbouring gems | *placeholder* |
-| `special.key` | Releases the rival | *placeholder* |
+`src/render/board.ts` exposes composable animations:
 
-The two scatters use the pack's gold skull for the **Super** scatter and the
-inactive one for the ordinary scatter, so gold reads as the rarer of the two.
-The pack documents them as one gameplay role, so repoint them if you would
-rather they matched that.
+- `collectSparkle(pos, color)` blooms the sparkle and emits coloured facets.
+- `floatingPayout(pos, value)` lifts the exact engine multiplier from a cell.
+- `dynamiteBlast(pos)` shows the large dynamite bundle, fuse shake, fire and embers.
+- `coinPick(pos, kind, value)` flips a bag into the denomination or scorpion.
+- `meterBurst(cells)` sends golden trails from the meter toward awarded cells.
+- `trainSweep()` drives a locomotive and coin carriage around the board rails,
+  with turning wheels and trailing steam.
 
-### Board and chrome — 8 keys
+These effects remove their temporary display objects after completion. Their
+speed follows the common tween runner, including turbo and reduced-motion
+handling. Game event animators compose them with symbol movement and the
+separate DOM win/bonus presentations. Feature payouts always come from engine
+events; art does not determine winnings.
 
-| Key | Pack file | Notes |
-| --- | --- | --- |
-| `board.background` | `background-neighbourhood-day-v1.png` | Full-bleed, cover-scaled, dimmed for contrast |
-| `board.frame` | `overlay-board-frame-v2.png` | Nine-sliced around the grid, so corners keep their curve while the straight runs stretch |
-| `ui.meter` | `overlay-meter-v2.png` | The fill is drawn in the channel behind it |
-| `ui.cage` | `overlay-cage-v2.png` | Bars, drawn in front of the rival |
-| `ui.padlock` | `overlay-padlock-v2.png` | In front of the bars |
-| `ui.title` | `title-emblem-v2.png` | Top-left brand |
-| `board.cell`, `board.trainCell` | *placeholder* | Cells are currently drawn, not textured |
+## Frame and meter fitting
 
-### Effects and coin game — 4 keys
-
-`effect.collect`, `effect.win` are mapped but not yet drawn by the renderer.
-`coinGame.bag` and `coinGame.scorpion` have no art and fall back to coloured
-rings.
-
-## Tuning the frame and meter
-
-Two things are fitted to the current art and will need adjusting if it changes:
-
-- **`FRAME_SCALE` and `FRAME_CORNER`** in `src/render/board.ts` — how the track
-  frame is nine-sliced and how thick it renders. `PAD` must stay large enough
-  to clear it, or the rails sit on the outer row and column.
-- **`--meter-left/right/top/bottom`** in `src/render/ui/style.css` — where the
-  usable channel sits inside the meter image, as percentages.
-
-## Known gaps
-
-- Upgrade, coin, dynamite, transform, key and the bandit wild are all
-  placeholders.
-- The coin game has no art of its own.
-
-## What is still drawn in code
-
-Styled rather than replaced: the HUD, meter fill, buttons and quiz modal
-(`src/render/ui/style.css`), the shot lines, blast rings and train sweep
-(`src/render/board.ts`), and the symbol placeholders themselves
-(`src/render/symbols.ts`). Palette lives as CSS custom properties at the top of
-`style.css` and as `GEM_TINTS` in `src/render/symbols.ts`.
+`FRAME_SCALE`, `FRAME_CORNER` and `PAD` in `src/render/board.ts` fit the existing
+nine-sliced rail frame. Meter CSS channel offsets in `src/render/ui/features.css`
+fit its transparent artwork. Both must be adjusted if those images change.
 
 ## Purple portrait gem — 10 October 2026
-`gem-purple-v4.png` uses the smiling man on the right in the new silver-hat photograph, with photographic facial detail inside an amethyst hexagonal gem. All seven purple gem levels now load this PNG, matching the other colours; level pips still distinguish values. Its alpha bounds are recorded in assets/manifest.json.
+
+`gem-purple-v4.png` uses the smiling man on the right in the new silver-hat
+photograph, with photographic facial detail inside an amethyst hexagonal gem.
+All seven purple levels retain this PNG; live pips distinguish their values.
+
+## Sound
+
+The original six supplied MP3s live in `assets/audio/`. Base music uses the
+separate `music000-background.mp3` derivative starting at 00:34; bonus music
+uses `music001.mp3`. Fourteen short effects were extracted from all four banks.
+`assets/audio/cues.json` records source offsets, gains and acoustic confidence;
+`assets/audio/CUES.md` records the spectrogram/classification analysis. These
+are inferred event roles, not original publisher cue names.

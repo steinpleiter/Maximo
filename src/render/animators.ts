@@ -14,6 +14,14 @@ export interface AnimatorHooks {
   setBonus(drops: number | null, isSuper: boolean): void;
   /** The rival is out of its cage (or back in it). */
   setCageOpen(open: boolean): void;
+  setMeter(value: number, size: number, instant?: boolean): Promise<void>;
+  releaseMeter(): Promise<void>;
+  nextDrop(free: boolean): void;
+  addDrops(drops: number): void;
+  setScatters(count: number, superCount: number): void;
+  showBonus(drops: number, isSuper: boolean): Promise<void>;
+  celebrate(win: number, kind: 'round' | 'goldRush' | 'bonus'): Promise<void>;
+  sound?(kind: 'collect' | 'coin' | 'crash'): void;
 }
 
 const AMBER = 0xe9a33a;
@@ -31,6 +39,8 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
 
   switch (ev.t) {
     case 'roundStart': {
+      hooks.nextDrop(ev.free);
+      await hooks.setMeter(ev.meter, ev.meterSize, true);
       board.resize(ev.cols, ev.rows, ev.trainCells);
       hooks.refit();
       hooks.setLevels(ev.gemLevels);
@@ -78,7 +88,8 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       // The collector walks its trail, swallowing each symbol as it arrives.
       for (const step of ev.path.slice(1)) {
         const eaten = eatenAt.get(`${step.r},${step.c}`);
-        if (eaten) await board.pop(eaten.cell.id, 130);
+        if (eaten) hooks.sound?.(eaten.cell.kind === 'coin' ? 'coin' : 'collect');
+        if (eaten) await all([board.pop(eaten.cell.id, 130), board.collectSparkle(step, tint, 130)]);
         await board.moveTo(ev.birdId, step.r, step.c, 110);
       }
 
@@ -91,7 +102,7 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
         await all(leftovers.map((e) => board.pop(e.cell.id, 120)));
       }
 
-      if (ev.win > 0) await board.ring(lastPos(ev.path).r, lastPos(ev.path).c, tint, 70);
+      if (ev.win > 0) await board.floatingPayout(lastPos(ev.path), ev.win, tint);
       return;
     }
 
@@ -114,10 +125,12 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       return;
 
     case 'meter':
+      await hooks.setMeter(ev.value, ev.size);
       return;
 
     case 'meterRelease':
       hooks.banner('Feature release', 'good');
+      await all([hooks.releaseMeter(), board.meterBurst(ev.cells)]);
       await stagger(ev.cells, 70, async (snap) => {
         if (!snap.cell) return;
         board.remove(board.idAt(snap.r, snap.c));
@@ -207,7 +220,7 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       return;
 
     case 'dynamite':
-      await board.ring(ev.pos.r, ev.pos.c, RED, 240);
+      await board.dynamiteBlast(ev.pos);
       await all(ev.destroyed.map((pos) => board.pop(board.idAt(pos.r, pos.c), 140)));
       return;
 
@@ -231,30 +244,31 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
     case 'coinGame':
       hooks.banner('Coin game!', 'good');
       await stagger(ev.picks, 150, async (pick) => {
-        const color = pick.kind === 'coin' ? AMBER : RED;
-        await board.ring(pick.pos.r, pick.pos.c, color, 110);
+        hooks.sound?.(pick.kind === 'coin' ? 'coin' : 'crash');
+        await board.coinPick(pick.pos, pick.kind, pick.value);
       });
       await delay(220);
+      await hooks.celebrate(ev.win, 'goldRush');
       return;
 
     case 'scatters':
+      hooks.setScatters(ev.count, ev.superCount);
       return;
 
     case 'bonusStart':
       hooks.setBonus(ev.drops, ev.isSuper);
-      hooks.banner(ev.isSuper ? `Super bonus — ${ev.drops} drops` : `Bonus — ${ev.drops} drops`, 'good');
-      await delay(500);
+      await hooks.showBonus(ev.drops, ev.isSuper);
       return;
 
     case 'bonusDropAwarded':
+      hooks.addDrops(ev.drops);
       hooks.banner(`+${ev.drops} drop`, 'good');
       await delay(160);
       return;
 
     case 'bonusEnd':
       hooks.setBonus(null, false);
-      hooks.banner(`Bonus total ${ev.totalWin.toFixed(2)}x`, 'good');
-      await delay(600);
+      await hooks.celebrate(ev.totalWin, 'bonus');
       return;
 
     case 'win':
@@ -262,6 +276,7 @@ export async function playEvent(ev: GameEvent, hooks: AnimatorHooks): Promise<vo
       return;
 
     case 'roundEnd':
+      await hooks.celebrate(ev.win, 'round');
       return;
 
     default: {

@@ -66,6 +66,7 @@ export class SymbolView extends Container {
   color: GemColor | null = null;
   private art: Container | null = null;
   private currentKey = '';
+  private currentDetail = '';
 
   /** The manifest key this view is currently drawn from. */
   get artKey(): string {
@@ -82,8 +83,10 @@ export class SymbolView extends Container {
   /** Rebuilds the art if the cell's appearance key has changed. */
   render(cell: Cell, gemLevels: Record<GemColor, number>): void {
     const key = keyForCell(cell, gemLevels);
-    if (key === this.currentKey && this.art) return;
+    const detail = `${cell.coinValue ?? ''}:${cell.upgradeSteps ?? ''}`;
+    if (key === this.currentKey && detail === this.currentDetail && this.art) return;
     this.currentKey = key;
+    this.currentDetail = detail;
     this.kind = cell.kind;
     this.color = cell.color ?? null;
 
@@ -100,7 +103,7 @@ export class SymbolView extends Container {
  * sprite a different visual weight depending on how much empty space it was
  * drawn with. The art pack measures the alpha box for exactly this reason.
  */
-function texturedSprite(key: string, texture: Texture, target: number): Sprite {
+export function texturedSprite(key: string, texture: Texture, target: number): Sprite {
   const sprite = new Sprite(texture);
   const box = boundsFor(key);
 
@@ -162,8 +165,8 @@ function buildArt(cell: Cell, gemLevels: Record<GemColor, number>, key: string):
     const target = cell.kind === 'bird' || cell.kind === 'bandit' ? S * 0.98 : S * 0.84;
     box.addChild(texturedSprite(key, texture, target));
 
-    if (cell.kind === 'coin') box.addChild(coinValueBadge(cell.coinValue ?? 0));
-    if (cell.kind === 'upgrade' || cell.kind === 'upgradeAll') {
+    if (cell.kind === 'coin' && key === 'special.coin') box.addChild(coinValueBadge(cell.coinValue ?? 0));
+    if ((cell.kind === 'upgrade' || cell.kind === 'upgradeAll') && !/\.[123]$/.test(key)) {
       box.addChild(stepsBadge(cell.upgradeSteps ?? 1));
     }
 
@@ -311,7 +314,7 @@ function coinPlaceholder(value: number): Container {
   disc.stroke({ width: 1.5, color: 0xf6d189, alpha: 0.8 });
 
   const label = new Text({
-    text: value >= 1000 ? `${value / 1000}k` : `${value}`,
+    text: value >= 1000 ? `${value / 1000}kx` : `${value}x`,
     style: labelStyle(value >= 1000 ? S * 0.22 : S * 0.26, 0x3a2405),
   });
   label.anchor.set(0.5);
@@ -355,15 +358,17 @@ function specialPlaceholder(kind: SymbolKind, badge?: string): Container {
 function coinValueBadge(value: number): Container {
   const box = new Container();
   const text = new Text({
-    text: value >= 1000 ? `${value / 1000}k` : `${value}`,
-    style: labelStyle(S * 0.24, 0x3a2405),
+    text: value >= 1000 ? `${value / 1000}kx` : `${value}x`,
+    style: labelStyle(S * 0.23, 0xffdb6c),
   });
   text.anchor.set(0.5);
 
   const plate = new Graphics();
-  plate.roundRect(-S * 0.17, S * 0.16, S * 0.34, S * 0.2, S * 0.1);
-  plate.fill({ color: SAND, alpha: 0.95 });
-  text.position.set(0, S * 0.26);
+  const width = Math.max(S * 0.42, text.width + S * 0.12);
+  plate.roundRect(-width / 2, S * 0.05, width, S * 0.28, S * 0.06);
+  plate.fill({ color: 0x332611, alpha: 0.96 });
+  plate.stroke({ color: 0xdca648, width: 1.5 });
+  text.position.set(0, S * 0.19);
 
   box.addChild(plate, text);
   return box;

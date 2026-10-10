@@ -125,6 +125,38 @@ Deliberate departures, all of them reasoned in comments at the point of change:
 - **Bandit duel outcomes are decided by the quiz** — correct means the bird wins
   and claims the loot. Set `duel.quizDecidesBanditDuel: false` for a coin flip.
 
-Mechanics are not protectable, but the Pirots name, art and characters are:
-there is no ELK branding anywhere in this codebase, and the placeholder art is
-original. Keep it that way when you add your own.
+The game keeps the custom Max Birds characters, portrait gems and neighbourhood
+background. The supplied Pirots promotional package now provides the special
+symbols; `ASSETS.md` records the source and the additional vector effects.
+
+## Gameplay presentations
+
+Win totals now count up in tiered celebrations: Big at 10×, Super at 25×,
+Mega at 50× and Epic at 100×. Smaller returns use a brief win presentation.
+The coin game gets its own Gold Rush screen, and bonus rounds start with a
+locomotive entrance and an explicit Start button. All numbers come from the
+existing engine; the payout math is unchanged.
+
+Collections, feature releases, dynamite, coin/scorpion reveals and the train
+heist have animated effects. The collection meter, scatter count and bonus
+free-drop counter follow the event tape. Turbo and reduced-motion settings
+apply to presentations.
+
+In development, open **Dev tools → Animation previews · no wager** to see
+each win tier, Gold Rush and both bonus intros without spending balance.
+Click a counting win to reveal its total, then click again to continue; win
+celebrations also dismiss automatically. Bonus intros wait for Start.
+
+## Audio
+
+The supplied background soundtrack starts at **00:34 of music000.mp3**, and
+loops that section. Bonus rounds crossfade to music001.mp3. Audio begins after
+your first click or keypress. The top-right Sound button mutes everything, and
+the adjacent volume control remembers your setting. Hidden tabs pause audio.
+
+Four supplied effects banks were segmented using silence detection, inspected
+with spectrograms, and classified locally. Fourteen short cues accompany
+collections, coin reveals, upgrades, shots, explosions, train movement and
+celebrations. See `assets/audio/CUES.md` and `assets/audio/cues.json` for source
+offsets and inferred labels. Clip decoding is lazy, simultaneous effects are
+limited, and muting cancels pending playback. Original MP3s are preserved.

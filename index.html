@@ -80,6 +80,13 @@
       <div id="quiz-layer" class="overlay" hidden></div>
       <div id="modal-layer" class="overlay" hidden></div>
       <div id="debug-layer"></div>
+      <div id="audio-controls" aria-label="Audio controls">
+        <button type="button" id="sound-toggle" aria-label="Enable sound" aria-pressed="false">Sound</button>
+        <details class="audio-volume">
+          <summary aria-label="Sound volume" title="Sound volume">♫</summary>
+          <label for="music-volume">Sound volume <input id="music-volume" type="range" min="0" max="100" step="5" value="30" /></label>
+        </details>
+      </div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

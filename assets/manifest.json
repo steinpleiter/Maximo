@@ -547,6 +547,453 @@
         1229,
         1195
       ]
+    },
+    {
+      "id": "money-bag",
+      "group": "gameplay-vector",
+      "file": "effects/money-bag.svg",
+      "status": "drawn-in-code",
+      "width": 160,
+      "height": 160,
+      "visible_bounds": [
+        8,
+        2,
+        152,
+        152
+      ]
+    },
+    {
+      "id": "scorpion",
+      "group": "gameplay-vector",
+      "file": "effects/scorpion.svg",
+      "status": "drawn-in-code",
+      "width": 160,
+      "height": 160,
+      "visible_bounds": [
+        8,
+        2,
+        152,
+        152
+      ]
+    },
+    {
+      "id": "promo-BigBomb",
+      "group": "promo-gameplay",
+      "file": "icons/BigBomb.png",
+      "source": "Downloads/Promotion Package/Symbols/BigBomb.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        115,
+        97,
+        253,
+        246
+      ]
+    },
+    {
+      "id": "promo-Bomb",
+      "group": "promo-gameplay",
+      "file": "icons/Bomb.png",
+      "source": "Downloads/Promotion Package/Symbols/Bomb.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        121,
+        115,
+        240,
+        245
+      ]
+    },
+    {
+      "id": "promo-Bonus",
+      "group": "promo-gameplay",
+      "file": "icons/Bonus.png",
+      "source": "Downloads/Promotion Package/Symbols/Bonus.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        112,
+        104,
+        249,
+        249
+      ]
+    },
+    {
+      "id": "promo-Coin10",
+      "group": "promo-gameplay",
+      "file": "icons/Coin10.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin10.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        114,
+        116,
+        245,
+        245
+      ]
+    },
+    {
+      "id": "promo-Coin100",
+      "group": "promo-gameplay",
+      "file": "icons/Coin100.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin100.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        101,
+        103,
+        257,
+        247
+      ]
+    },
+    {
+      "id": "promo-Coin1000",
+      "group": "promo-gameplay",
+      "file": "icons/Coin1000.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin1000.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        100,
+        90,
+        266,
+        259
+      ]
+    },
+    {
+      "id": "promo-Coin2",
+      "group": "promo-gameplay",
+      "file": "icons/Coin2.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin2.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        118,
+        126,
+        238,
+        239
+      ]
+    },
+    {
+      "id": "promo-Coin25",
+      "group": "promo-gameplay",
+      "file": "icons/Coin25.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin25.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        109,
+        111,
+        253,
+        245
+      ]
+    },
+    {
+      "id": "promo-Coin2500",
+      "group": "promo-gameplay",
+      "file": "icons/Coin2500.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin2500.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        100,
+        90,
+        266,
+        259
+      ]
+    },
+    {
+      "id": "promo-Coin5",
+      "group": "promo-gameplay",
+      "file": "icons/Coin5.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin5.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        122,
+        133,
+        235,
+        239
+      ]
+    },
+    {
+      "id": "promo-Coin50",
+      "group": "promo-gameplay",
+      "file": "icons/Coin50.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin50.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        114,
+        106,
+        251,
+        247
+      ]
+    },
+    {
+      "id": "promo-Coin500",
+      "group": "promo-gameplay",
+      "file": "icons/Coin500.png",
+      "source": "Downloads/Promotion Package/Symbols/Coin500.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        100,
+        90,
+        266,
+        259
+      ]
+    },
+    {
+      "id": "promo-CoinMaxWin",
+      "group": "promo-gameplay",
+      "file": "icons/CoinMaxWin.png",
+      "source": "Downloads/Promotion Package/Symbols/CoinMaxWin.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        98,
+        76,
+        265,
+        265
+      ]
+    },
+    {
+      "id": "promo-Crossover",
+      "group": "promo-gameplay",
+      "file": "icons/Crossover.png",
+      "source": "Downloads/Promotion Package/Symbols/Crossover.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        119,
+        112,
+        239,
+        242
+      ]
+    },
+    {
+      "id": "promo-Key",
+      "group": "promo-gameplay",
+      "file": "icons/Key.png",
+      "source": "Downloads/Promotion Package/Symbols/Key.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        112,
+        117,
+        245,
+        228
+      ]
+    },
+    {
+      "id": "promo-LevelUp",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUp.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUp.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        120,
+        130,
+        242,
+        243
+      ]
+    },
+    {
+      "id": "promo-LevelUpAll",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUpAll.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUpAll.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        116,
+        128,
+        244,
+        245
+      ]
+    },
+    {
+      "id": "promo-LevelUpAll_2",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUpAll_2.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUpAll_2.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        116,
+        128,
+        244,
+        245
+      ]
+    },
+    {
+      "id": "promo-LevelUpAll_3",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUpAll_3.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUpAll_3.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        116,
+        128,
+        244,
+        245
+      ]
+    },
+    {
+      "id": "promo-LevelUp_2",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUp_2.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUp_2.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        120,
+        130,
+        242,
+        243
+      ]
+    },
+    {
+      "id": "promo-LevelUp_3",
+      "group": "promo-gameplay",
+      "file": "icons/LevelUp_3.png",
+      "source": "Downloads/Promotion Package/Symbols/LevelUp_3.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        120,
+        130,
+        242,
+        243
+      ]
+    },
+    {
+      "id": "promo-Nest",
+      "group": "promo-gameplay",
+      "file": "icons/Nest.png",
+      "source": "Downloads/Promotion Package/Symbols/Nest.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        101,
+        178,
+        258,
+        255
+      ]
+    },
+    {
+      "id": "promo-Peanut",
+      "group": "promo-gameplay",
+      "file": "icons/Peanut.png",
+      "source": "Downloads/Promotion Package/Symbols/Peanut.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        153,
+        152,
+        206,
+        207
+      ]
+    },
+    {
+      "id": "promo-SuperBonus",
+      "group": "promo-gameplay",
+      "file": "icons/SuperBonus.png",
+      "source": "Downloads/Promotion Package/Symbols/SuperBonus.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        112,
+        99,
+        250,
+        251
+      ]
+    },
+    {
+      "id": "promo-Transform",
+      "group": "promo-gameplay",
+      "file": "icons/Transform.png",
+      "source": "Downloads/Promotion Package/Symbols/Transform.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        135,
+        120,
+        223,
+        240
+      ]
+    },
+    {
+      "id": "promo-Wild",
+      "group": "promo-gameplay",
+      "file": "icons/Wild.png",
+      "source": "Downloads/Promotion Package/Symbols/Wild.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        107,
+        122,
+        246,
+        232
+      ]
+    },
+    {
+      "id": "promo-WildBlack",
+      "group": "promo-gameplay",
+      "file": "icons/WildBlack.png",
+      "source": "Downloads/Promotion Package/Symbols/WildBlack.png",
+      "status": "supplied",
+      "width": 360,
+      "height": 360,
+      "visible_bounds": [
+        113,
+        130,
+        246,
+        232
+      ]
+    },
+    {
+      "id": "gold-coin",
+      "group": "gameplay-vector",
+      "file": "effects/gold-coin.svg",
+      "status": "drawn-in-code",
+      "width": 128,
+      "height": 128,
+      "visible_bounds": [
+        4,
+        2,
+        124,
+        126
+      ]
     }
   ]
 }

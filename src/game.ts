@@ -2,18 +2,21 @@ import { DEFAULT_CONFIG } from './config/gameConfig';
 import { Engine, type BuyKind, type ForceFlags, type RoundOptions } from './math/engine';
 import { refill, snapshot } from './math/grid';
 import { Rng } from './math/rng';
-import type { GemColor, QuizPrompt } from './math/types';
+import type { GameEvent, GemColor, QuizPrompt } from './math/types';
 import { ShuffledBagSource } from './quiz/selector';
 import { LOCAL_QUESTIONS } from './quiz/source';
 import { QuizStats } from './quiz/stats';
 import { playEvent, type AnimatorHooks } from './render/animators';
 import { GameStage } from './render/app';
-import { setSpeed } from './render/tween';
+import { getSpeed, setSpeed } from './render/tween';
 import { DebugPanel, type AutoAnswer } from './render/ui/debug';
 import { applyChrome, setCageOpen } from './render/ui/chrome';
 import { Hud } from './render/ui/hud';
 import { Panels } from './render/ui/panels';
 import { QuizModal } from './render/ui/quizModal';
+import { Celebrations } from './render/ui/celebrations';
+import { FeatureHud } from './render/ui/features';
+import { GameAudio } from './render/audio';
 
 const BET_STEPS = [0.2, 0.4, 0.6, 1, 2, 4, 6, 10, 20, 40, 60, 100];
 const STARTING_BALANCE = 1000;
@@ -31,12 +34,18 @@ interface SessionData {
  * tape into animations — pausing at every duel to put a question on screen.
  */
 export class Game {
+  private readonly audio = new GameAudio(() => this.refreshAudioControls());
   private readonly stage = new GameStage();
   private engine: Engine;
   private readonly hud: Hud;
   private readonly quiz: QuizModal;
   private readonly panels: Panels;
   private debug: DebugPanel | null = null;
+  private celebrations!: Celebrations;
+  private features!: FeatureHud;
+  private previewing = false;
+  private bonusCelebrated = false;
+  private lastGoldRushWin = -1;
 
   private readonly stats = QuizStats.load();
   private balance = STARTING_BALANCE;
@@ -69,6 +78,19 @@ export class Game {
     applyChrome();
     await this.stage.init(required('stage'));
     this.loadSession();
+    required('sound-toggle').addEventListener('click', () => this.audio.toggle());
+    required('music-volume').addEventListener('input', (event) => {
+      this.audio.setVolume(Number((event.target as HTMLInputElement).value) / 100);
+    });
+    this.refreshAudioControls();
+    required('app').addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('button') && !event.target.closest('#audio-controls')) {
+        this.audio.cue('button');
+      }
+    }, true);
+    this.celebrations = new Celebrations(required('app'));
+    this.features = new FeatureHud(required('playfield'));
+    await this.features.setMeter(0, DEFAULT_CONFIG.meter.size, true);
 
     if (import.meta.env.DEV) {
       this.debug = new DebugPanel(required('debug-layer'), {
@@ -76,6 +98,7 @@ export class Game {
         onSeed: (seed) => this.reseed(seed),
         onAutoAnswer: () => undefined,
         onReset: () => this.resetSession(),
+        onPreview: (kind) => void this.previewCelebration(kind),
       });
     }
 
@@ -84,7 +107,9 @@ export class Game {
     this.hud.banner('Spin to begin', 'good');
 
     window.addEventListener('keydown', (event) => {
-      if (event.code === 'Space' && !this.busy) {
+      if (event.code === 'Space' && !this.busy && !this.previewing &&
+          !(event.target instanceof HTMLElement && event.target.closest('button, input, select, textarea, [role="dialog"]')) &&
+          !document.querySelector('[role="dialog"], .overlay:not([hidden])')) {
         event.preventDefault();
         void this.spin();
       }
@@ -183,7 +208,7 @@ export class Game {
   }
 
   private async spin(opts: { buy?: BuyKind; force?: ForceFlags } = {}): Promise<void> {
-    if (this.busy) return;
+    if (this.busy || this.previewing) return;
 
     const cost = opts.buy ? DEFAULT_CONFIG.buy[opts.buy] * this.bet : this.bet;
     if (cost > this.balance) {
@@ -193,6 +218,8 @@ export class Game {
     }
 
     this.busy = true;
+    this.bonusCelebrated = false;
+    this.lastGoldRushWin = -1;
     setCageOpen(this.engine.state.bandit.released);
     this.stage.board.wake();
     this.hud.setBusy(true);
@@ -204,9 +231,9 @@ export class Game {
       const win = await this.playRound(opts);
       this.balance += win * this.bet;
       this.hud.setBalance(this.balance);
-      if (win > 0) this.hud.banner(`Round win ${win.toFixed(2)}x`, 'good');
       this.saveSession();
     } finally {
+      this.audio.setMode('base');
       this.busy = false;
       this.hud.setBusy(false);
     }
@@ -233,6 +260,7 @@ export class Game {
 
     while (!step.done) {
       for (const event of step.value.events) {
+        this.playEventSound(event);
         await playEvent(event, hooks);
       }
       // The engine's grid is the truth; never let a misread event leave two
@@ -275,6 +303,7 @@ export class Game {
 
   private animatorHooks(): AnimatorHooks {
     return {
+      sound: (kind) => this.audio.cue(kind, kind === 'crash' ? 0.7 : undefined),
       board: this.stage.board,
       refit: () => this.stage.fit(),
       setLevels: (levels: Record<GemColor, number>) => this.hud.setLevels(levels),
@@ -283,7 +312,79 @@ export class Game {
       banner: (text, tone) => this.hud.banner(text, tone),
       setBonus: (drops, isSuper) => this.hud.setBonus(drops, isSuper),
       setCageOpen: (open) => setCageOpen(open),
+      setMeter: (value, size, instant) => this.features.setMeter(value, size, instant),
+      releaseMeter: () => this.features.release(),
+      nextDrop: (free) => this.features.nextDrop(free),
+      addDrops: (drops) => this.features.addDrops(drops),
+      setScatters: (count, superCount) => this.features.setScatters(count, superCount),
+      showBonus: async (drops, isSuper) => {
+        this.audio.setMode('bonus');
+        this.audio.cue('bonus', 3 / getSpeed());
+        this.features.startBonus(drops, isSuper);
+        await this.celebrations.bonus(drops, isSuper);
+      },
+      celebrate: async (win, kind) => {
+        if (kind === 'round' && (this.bonusCelebrated || Math.abs(win - this.lastGoldRushWin) < 1e-8)) return;
+        if (kind === 'goldRush') this.lastGoldRushWin = win;
+        if (kind === 'bonus') {
+          this.bonusCelebrated = true;
+          this.features.endBonus();
+        }
+        if (win > 0) this.audio.cue(win >= 10 || kind !== 'round' ? 'bigWin' : 'coin', 3 / getSpeed());
+        await this.celebrations.win(win, this.bet, kind);
+        if (kind === 'bonus') this.audio.setMode('base');
+      },
     };
+  }
+
+  /** Dev-only art previews do not spin, spend balance, or change the engine. */
+  private async previewCelebration(kind: string): Promise<void> {
+    if (this.busy || this.previewing) return;
+    this.previewing = true;
+    this.setAutoplay(false);
+    this.hud.setBusy(true);
+    try {
+      if (kind === 'bonus' || kind === 'superBonus') {
+        this.audio.setMode('bonus');
+        this.audio.cue('bonus', 3 / getSpeed());
+        await this.celebrations.bonus(DEFAULT_CONFIG.bonus.initialDrops, kind === 'superBonus');
+      } else {
+        const amount: Record<string, number> = { small: 0.09, big: 16.94, super: 37.44, mega: 74.12, epic: 135, goldRush: 278.27 };
+        this.audio.cue(kind === 'small' ? 'coin' : 'bigWin', 3 / getSpeed());
+        await this.celebrations.win(amount[kind] ?? 0.09, this.bet, kind === 'goldRush' ? 'goldRush' : 'round');
+      }
+    } finally {
+      this.audio.setMode('base');
+      this.previewing = false;
+      this.hud.setBusy(false);
+    }
+  }
+
+  private refreshAudioControls(): void {
+    const { muted, volume, unlocked, unavailable } = this.audio.settings;
+    const button = required('sound-toggle');
+    const audible = unlocked && !muted && volume > 0;
+    button.textContent = muted ? 'Sound off' : audible ? 'Sound on' : 'Sound';
+    button.setAttribute('aria-pressed', String(!muted && unlocked));
+    button.setAttribute('aria-label', muted || !unlocked ? 'Enable sound' : 'Mute sound');
+    button.title = unavailable ? 'Audio could not start. Click to retry.' : audible ? 'Mute sound' : 'Click to enable sound';
+    (required('music-volume') as HTMLInputElement).value = String(Math.round(volume * 100));
+  }
+
+  private playEventSound(event: GameEvent): void {
+    switch (event.t) {
+      case 'roundStart': this.audio.cue('spin'); break;
+      case 'refill': this.audio.cue('land'); break;
+      case 'gemUpgrade': this.audio.cue('upgrade', 1.2 / getSpeed()); break;
+      case 'meterRelease':
+      case 'transform': this.audio.cue('powerUp', 1.2 / getSpeed()); break;
+      case 'showdown': this.audio.cue('gunshot'); break;
+      case 'dynamite': this.audio.cue('explosion', 1.2 / getSpeed()); break;
+      case 'trainHeist': this.audio.cue('train', 1.5 / getSpeed()); break;
+      case 'banditRelease': this.audio.cue('crash', 0.7); break;
+      case 'quizAnswered': this.audio.cue(event.correct ? 'collect' : 'land'); break;
+      case 'bonusDropAwarded': this.audio.cue('win', 1.2 / getSpeed()); break;
+    }
   }
 }
 

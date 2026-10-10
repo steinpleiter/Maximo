@@ -1,0 +1,26 @@
+.feature-meter { position:absolute; z-index:3; top:0; left:50%; transform:translateX(-50%); width:clamp(180px,30vw,360px); height:42px; border:2px solid #9a7140; border-radius:16px; background:linear-gradient(#302c35,#15121a); box-shadow:0 3px 12px #000a,inset 0 1px 2px #fff5; pointer-events:none; overflow:hidden; }
+.feature-meter-track { position:absolute; inset:5px; border-radius:10px; overflow:hidden; background:#08060a; }
+.feature-meter-fill { width:100%; height:100%; transform:scaleX(var(--fill,0)); transform-origin:left; background:linear-gradient(#ffef9a,#f9ad22 45%,#ba6214); box-shadow:0 0 16px #ffc14a; }
+.feature-meter-label,.feature-meter-value { position:absolute; z-index:1; left:12px; top:12px; font-size:9px; font-weight:900; letter-spacing:.09em; text-shadow:0 1px 3px #000,0 0 4px #000; }
+.feature-meter-value { left:auto; right:12px; font-variant-numeric:tabular-nums; }
+.feature-meter.releasing { box-shadow:0 0 28px #ffd35c; filter:brightness(1.7); }
+.feature-bonus { position:absolute; right:1%; top:10%; z-index:3; display:grid; text-align:center; min-width:130px; padding:14px 20px; border:3px ridge #aa895c; border-radius:20% / 30%; background:linear-gradient(170deg,#744b2a,#352016 55%,#563523); box-shadow:0 6px 18px #0009; }
+.feature-bonus[hidden] { display:none; }
+.feature-bonus span { font-weight:900; color:#ffd571; font-size:12px; letter-spacing:.06em; }
+.feature-bonus strong { font-size:clamp(28px,4vw,52px); line-height:1.2; color:#ffcf59; text-shadow:0 3px #814613,0 5px #1b0d07; }
+.feature-bonus small { font-size:9px; letter-spacing:.08em; }
+.feature-scatters { position:absolute; left:1%; bottom:4%; display:flex; flex-direction:column; align-items:center; z-index:3; pointer-events:none; font-size:10px; font-weight:800; letter-spacing:.07em; text-shadow:0 2px 5px #000; }
+.feature-scatters img { width:clamp(40px,6vw,75px); height:clamp(40px,6vw,75px); object-fit:contain; filter:drop-shadow(0 4px 8px #000a); }
+.feature-scatters.ready { color:#ffd65b; filter:drop-shadow(0 0 10px #ffba37); }
+@media(max-width:760px) { .feature-meter { width:180px; height:32px; } .feature-meter-label,.feature-meter-value { top:8px; font-size:7px; } .feature-bonus { top:40px; right:0; min-width:66px; padding:8px; } .feature-bonus span { font-size:8px; } .feature-bonus small { font-size:7px; max-width:60px; } .feature-bonus strong { font-size:25px; } .feature-scatters { bottom:0; left:0; font-size:8px; } }
+.level-icon { width:24px; height:24px; object-fit:contain; transform:scale(1.4); }
+/* Use the pack's metal meter and safe; fill only its recessed glass channel. */
+.feature-meter { height:60px; border:0; border-radius:0; background:var(--meter-art) center / 106% 212% no-repeat; box-shadow:none; overflow:visible; }
+.feature-meter-track { inset:38% 23.5% 29% 8%; border-radius:12px; background:#0c0b0a; }
+.feature-meter-label,.feature-meter-value { top:54%; transform:translateY(-50%); font-size:8px; }
+.feature-meter-label { left:10%; }
+.feature-meter-value { right:25%; }
+.feature-meter.releasing { box-shadow:none; filter:brightness(1.6) drop-shadow(0 0 14px #ffc247); }
+.feature-scatter-icon { position:relative; width:clamp(40px,6vw,75px); height:clamp(40px,6vw,75px); overflow:hidden; }
+.feature-scatter-icon img { position:absolute; width:248%; height:248%; max-width:none; left:-74%; top:-70%; }
+@media(max-width:760px) { .feature-meter { height:36px; } .feature-meter-label,.feature-meter-value { font-size:5px; } }
