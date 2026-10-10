@@ -1,0 +1,54 @@
+[
+  {
+    "id": "gem-red",
+    "group": "gem",
+    "version": 3,
+    "transparent": true,
+    "file": "gem-red-v3.png",
+    "references": [
+      "references/gem-approved-faceted.png",
+      "references/max-laughing.jpg",
+      "references/gem-approved-faceted.png"
+    ],
+    "prompt": "Use case: compositing / identity-preserve. Edit the FIRST image: preserve this gem's silhouette, red jewel color, intricate angular crystal facets, white specular flashes, glossy translucent material, scale, position and padding. FIRST image is the gem edit target. SECOND image is the actual PHOTO portrait source. THIRD image is the user's approved gem finish reference only.\nPrimary request: replace ONLY the illustrated/carved cartoon face inside the gem with a REAL PHOTOGRAPHIC portrait of Max from image 2. Max is ONLY the laughing man on the LEFT in the cream shirt; completely exclude the other man. Use that exact laughing pose, facial proportions, eye creases, real mouth and teeth, real brown fringe.\nThe portrait should read as an actual cutout photograph viewed through glass inside the gem. Preserve natural photographic skin texture, asymmetries, pores, individual hair strands and source expression. Natural skin and hair tones remain clearly perceptible with only a subtle red transmitted-light tint and soft colored rim reflections. This is NOT a painted or drawn portrait, NOT a carved bas-relief or sculpted gemstone bust, NOT a cartoon or generic handsome face. No smoothing or beautification, no invented smile or new pose, no polygonal facets across skin, no human face reconstructed in jewel material. Photographic fidelity is the main change.\nRemove the source room/DJ backdrop, hands, other people, text and equipment. Crop head and a little neck/upper shoulder so the portrait fits the central front face of the gem, rim facets visible all around. Preserve entire gem and its approved polished finish. One single red gem only, centered on square canvas, genuinely transparent alpha outside its silhouette, no black background, no checkerboard baked in, no ground or new shadows, no labels, logos or watermark."
+  },
+  {
+    "id": "gem-blue",
+    "group": "gem",
+    "version": 3,
+    "transparent": true,
+    "file": "gem-blue-v3.png",
+    "references": [
+      "archive/v1/assets/gem-blue.png",
+      "references/max-dj.jpg",
+      "references/gem-approved-faceted.png"
+    ],
+    "prompt": "Use case: compositing / identity-preserve. Edit the FIRST image: preserve this gem's silhouette, blue jewel color, intricate angular crystal facets, white specular flashes, glossy translucent material, scale, position and padding. FIRST image is the gem edit target. SECOND image is the actual PHOTO portrait source. THIRD image is the user's approved gem finish reference only.\nPrimary request: replace ONLY the illustrated/carved cartoon face inside the gem with a REAL PHOTOGRAPHIC portrait of Max from image 2. Max is the single DJ in image 2. Use his exact downward-looking, slightly turned head and focused closed-mouth expression; preserve his real hair, nose, eyelids, lips and facial proportions. A little of the headphone collar can remain.\nThe portrait should read as an actual cutout photograph viewed through glass inside the gem. Preserve natural photographic skin texture, asymmetries, pores, individual hair strands and source expression. Natural skin and hair tones remain clearly perceptible with only a subtle blue transmitted-light tint and soft colored rim reflections. This is NOT a painted or drawn portrait, NOT a carved bas-relief or sculpted gemstone bust, NOT a cartoon or generic handsome face. No smoothing or beautification, no invented smile or new pose, no polygonal facets across skin, no human face reconstructed in jewel material. Photographic fidelity is the main change.\nRemove the source room/DJ backdrop, hands, other people, text and equipment. Crop head and a little neck/upper shoulder so the portrait fits the central front face of the gem, rim facets visible all around. Preserve entire gem and its approved polished finish. One single blue gem only, centered on square canvas, genuinely transparent alpha outside its silhouette, no black background, no checkerboard baked in, no ground or new shadows, no labels, logos or watermark."
+  },
+  {
+    "id": "gem-green",
+    "group": "gem",
+    "version": 3,
+    "transparent": true,
+    "file": "gem-green-v3.png",
+    "references": [
+      "archive/v1/assets/gem-green.png",
+      "references/max-laughing.jpg",
+      "references/gem-approved-faceted.png"
+    ],
+    "prompt": "Use case: compositing / identity-preserve. Edit the FIRST image: preserve this gem's silhouette, green jewel color, intricate angular crystal facets, white specular flashes, glossy translucent material, scale, position and padding. FIRST image is the gem edit target. SECOND image is the actual PHOTO portrait source. THIRD image is the user's approved gem finish reference only.\nPrimary request: replace ONLY the illustrated/carved cartoon face inside the gem with a REAL PHOTOGRAPHIC portrait of Max from image 2. Max is ONLY the laughing man on the LEFT in the cream shirt; completely exclude the other man. Use that exact laughing pose, facial proportions, eye creases, real mouth and teeth, real brown fringe.\nThe portrait should read as an actual cutout photograph viewed through glass inside the gem. Preserve natural photographic skin texture, asymmetries, pores, individual hair strands and source expression. Natural skin and hair tones remain clearly perceptible with only a subtle green transmitted-light tint and soft colored rim reflections. This is NOT a painted or drawn portrait, NOT a carved bas-relief or sculpted gemstone bust, NOT a cartoon or generic handsome face. No smoothing or beautification, no invented smile or new pose, no polygonal facets across skin, no human face reconstructed in jewel material. Photographic fidelity is the main change.\nRemove the source room/DJ backdrop, hands, other people, text and equipment. Crop head and a little neck/upper shoulder so the portrait fits the central front face of the gem, rim facets visible all around. Preserve entire gem and its approved polished finish. One single green gem only, centered on square canvas, genuinely transparent alpha outside its silhouette, no black background, no checkerboard baked in, no ground or new shadows, no labels, logos or watermark."
+  },
+  {
+    "id": "gem-purple",
+    "group": "gem",
+    "version": 3,
+    "transparent": true,
+    "file": "gem-purple-v3.png",
+    "references": [
+      "archive/v1/assets/gem-purple.png",
+      "references/max-dj.jpg",
+      "references/gem-approved-faceted.png"
+    ],
+    "prompt": "Use case: compositing / identity-preserve. Edit the FIRST image: preserve this gem's silhouette, purple jewel color, intricate angular crystal facets, white specular flashes, glossy translucent material, scale, position and padding. FIRST image is the gem edit target. SECOND image is the actual PHOTO portrait source. THIRD image is the user's approved gem finish reference only.\nPrimary request: replace ONLY the illustrated/carved cartoon face inside the gem with a REAL PHOTOGRAPHIC portrait of Max from image 2. Max is the single DJ in image 2. Use his exact downward-looking, slightly turned head and focused closed-mouth expression; preserve his real hair, nose, eyelids, lips and facial proportions. A little of the headphone collar can remain.\nThe portrait should read as an actual cutout photograph viewed through glass inside the gem. Preserve natural photographic skin texture, asymmetries, pores, individual hair strands and source expression. Natural skin and hair tones remain clearly perceptible with only a subtle purple transmitted-light tint and soft colored rim reflections. This is NOT a painted or drawn portrait, NOT a carved bas-relief or sculpted gemstone bust, NOT a cartoon or generic handsome face. No smoothing or beautification, no invented smile or new pose, no polygonal facets across skin, no human face reconstructed in jewel material. Photographic fidelity is the main change.\nRemove the source room/DJ backdrop, hands, other people, text and equipment. Crop head and a little neck/upper shoulder so the portrait fits the central front face of the gem, rim facets visible all around. Preserve entire gem and its approved polished finish. One single purple gem only, centered on square canvas, genuinely transparent alpha outside its silhouette, no black background, no checkerboard baked in, no ground or new shadows, no labels, logos or watermark."
+  }
+]

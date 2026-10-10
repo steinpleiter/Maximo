@@ -1,0 +1,537 @@
+{
+  "title": "Max Birds",
+  "created": "2026-10-10",
+  "generator": "ChatGPT built-in image generation",
+  "style_reference": "Pirots 3",
+  "target_count": 25,
+  "assets": [
+    {
+      "id": "background-neighbourhood-day",
+      "group": "background",
+      "file": "background-neighbourhood-day-v1.png",
+      "version": 1,
+      "requested_transparent": false,
+      "status": "generated",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "has_transparency": false,
+      "bytes": 3102111,
+      "visible_bounds": null
+    },
+    {
+      "id": "background-courtyard",
+      "group": "background",
+      "file": "background-courtyard-v2.png",
+      "version": 2,
+      "requested_transparent": false,
+      "status": "generated",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "has_transparency": false,
+      "bytes": 2506281,
+      "visible_bounds": null
+    },
+    {
+      "id": "background-metro-dusk",
+      "group": "background",
+      "file": "background-metro-dusk-v2.png",
+      "version": 2,
+      "requested_transparent": false,
+      "status": "generated",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "has_transparency": false,
+      "bytes": 2161271,
+      "visible_bounds": null
+    },
+    {
+      "id": "background-rooftop-dj",
+      "group": "background",
+      "file": "background-rooftop-dj-v2.png",
+      "version": 2,
+      "requested_transparent": false,
+      "status": "generated",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "has_transparency": false,
+      "bytes": 2167234,
+      "visible_bounds": null
+    },
+    {
+      "id": "bird-blue-captain",
+      "group": "character",
+      "file": "bird-blue-captain-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1651244,
+      "visible_bounds": [
+        163,
+        52,
+        1125,
+        1181
+      ]
+    },
+    {
+      "id": "bird-green-explorer",
+      "group": "character",
+      "file": "bird-green-explorer-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1550824,
+      "visible_bounds": [
+        198,
+        110,
+        1142,
+        1166
+      ]
+    },
+    {
+      "id": "bird-purple-dj",
+      "group": "character",
+      "file": "bird-purple-dj-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1629797,
+      "visible_bounds": [
+        200,
+        75,
+        1114,
+        1183
+      ]
+    },
+    {
+      "id": "bird-red-trickster",
+      "group": "character",
+      "file": "bird-red-trickster-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1511006,
+      "visible_bounds": [
+        158,
+        69,
+        1135,
+        1171
+      ]
+    },
+    {
+      "id": "bird-rival",
+      "group": "character",
+      "file": "bird-rival-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1604087,
+      "visible_bounds": [
+        185,
+        55,
+        1169,
+        1200
+      ]
+    },
+    {
+      "id": "gem-blue",
+      "group": "gem",
+      "file": "gem-blue-v3.png",
+      "version": 3,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1701461,
+      "visible_bounds": [
+        90,
+        73,
+        1165,
+        1177
+      ]
+    },
+    {
+      "id": "gem-red",
+      "group": "gem",
+      "file": "gem-red-v3.png",
+      "version": 3,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1838492,
+      "visible_bounds": [
+        71,
+        76,
+        1180,
+        1192
+      ]
+    },
+    {
+      "id": "gem-green",
+      "group": "gem",
+      "file": "gem-green-v4.png",
+      "version": 4,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1751279,
+      "visible_bounds": [
+        23,
+        18,
+        1228,
+        1228
+      ]
+    },
+    {
+      "id": "gem-purple",
+      "group": "gem",
+      "file": "gem-purple-v4.png",
+      "version": 4,
+      "requested_transparent": true,
+      "status": "awaiting_photo"
+    },
+    {
+      "id": "symbol-safe",
+      "group": "symbol",
+      "file": "symbol-safe-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1495952,
+      "visible_bounds": [
+        158,
+        189,
+        1102,
+        1057
+      ]
+    },
+    {
+      "id": "symbol-jar",
+      "group": "symbol",
+      "file": "symbol-jar-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 995441,
+      "visible_bounds": [
+        245,
+        125,
+        1026,
+        1129
+      ]
+    },
+    {
+      "id": "symbol-horseshoe",
+      "group": "symbol",
+      "file": "symbol-horseshoe-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1051276,
+      "visible_bounds": [
+        115,
+        170,
+        1139,
+        1120
+      ]
+    },
+    {
+      "id": "symbol-bonus-gold",
+      "group": "symbol",
+      "file": "symbol-bonus-gold-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 939000,
+      "visible_bounds": [
+        34,
+        96,
+        1220,
+        1128
+      ]
+    },
+    {
+      "id": "symbol-bonus-inactive",
+      "group": "symbol",
+      "file": "symbol-bonus-inactive-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 963622,
+      "visible_bounds": [
+        43,
+        195,
+        1212,
+        1062
+      ]
+    },
+    {
+      "id": "overlay-cage",
+      "group": "overlay",
+      "file": "overlay-cage-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 825334,
+      "visible_bounds": [
+        260,
+        8,
+        994,
+        1206
+      ]
+    },
+    {
+      "id": "overlay-padlock",
+      "group": "overlay",
+      "file": "overlay-padlock-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1007763,
+      "visible_bounds": [
+        228,
+        115,
+        1027,
+        1139
+      ]
+    },
+    {
+      "id": "overlay-meter",
+      "group": "overlay",
+      "file": "overlay-meter-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 752409,
+      "visible_bounds": [
+        65,
+        194,
+        2107,
+        536
+      ]
+    },
+    {
+      "id": "overlay-board-frame",
+      "group": "overlay",
+      "file": "overlay-board-frame-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 760932,
+      "visible_bounds": [
+        66,
+        84,
+        1188,
+        1166
+      ]
+    },
+    {
+      "id": "title-emblem",
+      "group": "branding",
+      "file": "title-emblem-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1762111,
+      "visible_bounds": [
+        106,
+        88,
+        1180,
+        1163
+      ]
+    },
+    {
+      "id": "effect-collect-sparkle",
+      "group": "effect",
+      "file": "effect-collect-sparkle-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 405219,
+      "visible_bounds": [
+        303,
+        326,
+        951,
+        891
+      ]
+    },
+    {
+      "id": "effect-win-sunburst",
+      "group": "effect",
+      "file": "effect-win-sunburst-v2.png",
+      "version": 2,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1282776,
+      "visible_bounds": [
+        30,
+        23,
+        1229,
+        1195
+      ]
+    }
+  ]
+}
