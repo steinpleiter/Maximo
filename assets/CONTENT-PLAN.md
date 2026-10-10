@@ -38,3 +38,6 @@ Added a fourth background using the user-supplied canal-side street photograph: 
 
 ## Four photographic gems completed — 10 October 2026
 Purple uses the new silver-hat photo, selecting the smiling man on the right. Blue, red, green and purple now each have a separate source photo. Prior pending notes above are historical.
+
+## Seven missing feature symbols — 10 October 2026
+Added the seven requested icons from official ELK Pirots 3 image references: dark bandit W, silver and gold horseshoes, coin bag, dynamite, XXX moonshine jug, and brass key. The full local pack now has 32 generated PNGs. Maximo’s active pack lists 29 PNGs, retaining its existing choice of one neighbourhood background; additional raw references are outside that list. Seven runtime keys are connected; payout and step labels stay dynamic.

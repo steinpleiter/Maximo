@@ -34,3 +34,7 @@ The new `background-neighbourhood-day-v1.png` uses the supplied street photograp
 
 ## Repository package
 PNG paths in the manifest, preview, and prompts are relative to this assets folder. Original source photos and historical image variants are excluded. The packaged preview is static and can be opened locally.
+
+## Seven official-reference feature icons
+Bandit wild, Upgrade, Upgrade All, Coin, Dynamite, Transform and Key now have separate transparent PNGs recreated from the official ELK Pirots 3 source images. See SYMBOL-REFERENCE-RESEARCH.md for the exact source files and observed shapes. The game retains dynamic coin-value and upgrade-step badges.
+The repository preview and manifest list 29 PNGs in the active Max Birds pack. Additional raw references and an unselected duplicate supplied concurrently on main remain outside that curated list. Three older alternative backgrounds remain in the local content pack and were already absent from main before this icon update.

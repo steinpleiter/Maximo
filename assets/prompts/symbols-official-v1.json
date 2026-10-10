@@ -1,0 +1,114 @@
+[
+  {
+    "id": "symbol-bandit-wild",
+    "key": "special.wildBandit",
+    "source": "WildBlack.png",
+    "sheet": "Pirots3_Paytable3.png",
+    "detail": "The black bandit wild: a chunky capital W in dark charcoal/navy gunmetal, silver beveled top surfaces and edging, angular broad western slab-letter silhouette. Exactly one standalone W, no colored gems around it, no other lettering.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-bandit-wild-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/WildBlack.png",
+      "references/pirots3-official/Pirots3_Paytable3.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The black bandit wild: a chunky capital W in dark charcoal/navy gunmetal, silver beveled top surfaces and edging, angular broad western slab-letter silhouette. Exactly one standalone W, no colored gems around it, no other lettering."
+  },
+  {
+    "id": "symbol-upgrade",
+    "key": "special.upgrade",
+    "source": "LevelUp.png",
+    "sheet": "Pirots3_Paytable2.png",
+    "detail": "The single-color upgrade: one upright U-shaped silver steel horseshoe, open ends at top, thick beveled metal, dark inset nail holes around the arms, bright pale blue-white top-end caps and reflective silver front. No arrow, no badge, no number; the game adds +1/+2/+3.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-upgrade-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/LevelUp.png",
+      "references/pirots3-official/Pirots3_Paytable2.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The single-color upgrade: one upright U-shaped silver steel horseshoe, open ends at top, thick beveled metal, dark inset nail holes around the arms, bright pale blue-white top-end caps and reflective silver front. No arrow, no badge, no number; the game adds +1/+2/+3."
+  },
+  {
+    "id": "symbol-upgrade-all",
+    "key": "special.upgradeAll",
+    "source": "LevelUpAll.png",
+    "sheet": "Pirots3_Paytable2.png",
+    "detail": "The all-colors upgrade: one upright U-shaped polished GOLD horseshoe, open ends at top, thick yellow-gold beveled metal, dark inset nail holes, bright pale gold-white top-end caps and warm amber metallic reflections. Shape consistent with official gold horseshoe. No arrow, no badge, no number; the game adds +1/+2/+3.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-upgrade-all-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/LevelUpAll.png",
+      "references/pirots3-official/Pirots3_Paytable2.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The all-colors upgrade: one upright U-shaped polished GOLD horseshoe, open ends at top, thick yellow-gold beveled metal, dark inset nail holes, bright pale gold-white top-end caps and warm amber metallic reflections. Shape consistent with official gold horseshoe. No arrow, no badge, no number; the game adds +1/+2/+3."
+  },
+  {
+    "id": "symbol-coin",
+    "key": "special.coin",
+    "source": "Coin2.png",
+    "sheet": "Pirots3_Paytable3.png",
+    "detail": "The coin reward icon is the official dark olive-brown drawstring MONEY BAG overflowing with shiny gold coins, a red cord tied around its mouth, warm gold reflections and chunky folded cloth shape. Preserve this bag and coins design, not a standalone coin disc. CHANGE ONLY its printed numeric face: remove the source 2x entirely and leave a broad clean dark cloth panel on the bag front with no text, numeral, symbol or denomination. The game overlays the true coin value; no baked-in value anywhere.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-coin-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/Coin2.png",
+      "references/pirots3-official/Pirots3_Paytable3.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The coin reward icon is the official dark olive-brown drawstring MONEY BAG overflowing with shiny gold coins, a red cord tied around its mouth, warm gold reflections and chunky folded cloth shape. Preserve this bag and coins design, not a standalone coin disc. CHANGE ONLY its printed numeric face: remove the source 2x entirely and leave a broad clean dark cloth panel on the bag front with no text, numeral, symbol or denomination. The game overlays the true coin value; no baked-in value anywhere."
+  },
+  {
+    "id": "symbol-dynamite",
+    "key": "special.dynamite",
+    "source": "Bomb.png",
+    "sheet": "Pirots3_Paytable3.png",
+    "detail": "The dynamite: the official small diagonal bundle of RED dynamite sticks tied together with a broad shiny GOLD band around the middle, dark red endcaps, a twisting dark braided fuse rising from the top, slightly angled down-left. Preserve the cylinders, golden band and fuse. No TNT tile, no wooden crate, no explosion, no lettering.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-dynamite-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/Bomb.png",
+      "references/pirots3-official/Pirots3_Paytable3.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The dynamite: the official small diagonal bundle of RED dynamite sticks tied together with a broad shiny GOLD band around the middle, dark red endcaps, a twisting dark braided fuse rising from the top, slightly angled down-left. Preserve the cylinders, golden band and fuse. No TNT tile, no wooden crate, no explosion, no lettering."
+  },
+  {
+    "id": "symbol-transform",
+    "key": "special.transform",
+    "source": "Transform.png",
+    "sheet": "Pirots3_Paytable4.png",
+    "detail": "The transform icon: exactly the official upright stout ceramic MOONSHINE JUG. Cream lower body with three dark brown X markings XXX across its front, glossy brown upper shoulder and short brown neck, tan cork, small curved handle on its upper right side, softly rounded earthenware base. Preserve the official jug proportions, materials and XXX motif. No teal tile, no diamond, no extra symbols.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-transform-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/Transform.png",
+      "references/pirots3-official/Pirots3_Paytable4.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The transform icon: exactly the official upright stout ceramic MOONSHINE JUG. Cream lower body with three dark brown X markings XXX across its front, glossy brown upper shoulder and short brown neck, tan cork, small curved handle on its upper right side, softly rounded earthenware base. Preserve the official jug proportions, materials and XXX motif. No teal tile, no diamond, no extra symbols."
+  },
+  {
+    "id": "symbol-key",
+    "key": "special.key",
+    "source": "Key.png",
+    "sheet": "Pirots3_Paytable5.png",
+    "detail": "The cage-release key: exactly the official chunky GOLD BRASS KEY angled diagonally from upper-left teeth toward the large round bow at lower-right, short cylindrical shaft, rectangular bit and teeth at upper-left, ornate connecting collar and large thick rounded ring bow. Rich yellow-gold polished bevels, orange shading, bright warm metal highlights. Match the source's embossed collar detail. Single key only, no lock or bird or lettering outside its actual design.",
+    "group": "symbol",
+    "version": 1,
+    "file": "symbol-key-v1.png",
+    "transparent": true,
+    "references": [
+      "references/pirots3-official/Key.png",
+      "references/pirots3-official/Pirots3_Paytable5.png"
+    ],
+    "prompt": "Create one clean, high-resolution game symbol faithfully matching the official Pirots 3 source icon in IMAGE 1. IMAGE 2 is the official paytable screenshot for corroborating its design and painted material finish only; exclude the interface, backgrounds, birds and other symbols. Preserve the source object's exact shape, proportions, colors and distinctive features. Use Pirots 3's polished painted 2.5D art, bold dark contours, soft bevels, rich metallic and material shading, crisp white highlights and warm upper-left lighting. Cleanly redraw at large scale; eliminate the tiny source PNG's stretched edge pixels and rectangular color smears. Center the single icon at about 80% of a square canvas with even padding, all of its visible shape fully in frame. Genuine transparent alpha outside the isolated object, no backdrop, checkerboard, tile, pedestal, surrounding glow or drop shadow. No watermark.\nPRIMARY SUBJECT: The cage-release key: exactly the official chunky GOLD BRASS KEY angled diagonally from upper-left teeth toward the large round bow at lower-right, short cylindrical shaft, rectangular bit and teeth at upper-left, ornate connecting collar and large thick rounded ring bow. Rich yellow-gold polished bevels, orange shading, bright warm metal highlights. Match the source's embossed collar detail. Single key only, no lock or bird or lettering outside its actual design."
+  }
+]

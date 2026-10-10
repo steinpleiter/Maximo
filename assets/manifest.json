@@ -3,7 +3,7 @@
   "created": "2026-10-10",
   "generator": "ChatGPT built-in image generation",
   "style_reference": "Pirots 3",
-  "target_count": 25,
+  "target_count": 29,
   "assets": [
     {
       "id": "background-neighbourhood-day",
@@ -18,51 +18,6 @@
       "alpha_extrema": null,
       "has_transparency": false,
       "bytes": 3102111,
-      "visible_bounds": null
-    },
-    {
-      "id": "background-courtyard",
-      "group": "background",
-      "file": "background-courtyard-v2.png",
-      "version": 2,
-      "requested_transparent": false,
-      "status": "generated",
-      "width": 1672,
-      "height": 941,
-      "mode": "RGB",
-      "alpha_extrema": null,
-      "has_transparency": false,
-      "bytes": 2506281,
-      "visible_bounds": null
-    },
-    {
-      "id": "background-metro-dusk",
-      "group": "background",
-      "file": "background-metro-dusk-v2.png",
-      "version": 2,
-      "requested_transparent": false,
-      "status": "generated",
-      "width": 1672,
-      "height": 941,
-      "mode": "RGB",
-      "alpha_extrema": null,
-      "has_transparency": false,
-      "bytes": 2161271,
-      "visible_bounds": null
-    },
-    {
-      "id": "background-rooftop-dj",
-      "group": "background",
-      "file": "background-rooftop-dj-v2.png",
-      "version": 2,
-      "requested_transparent": false,
-      "status": "generated",
-      "width": 1672,
-      "height": 941,
-      "mode": "RGB",
-      "alpha_extrema": null,
-      "has_transparency": false,
-      "bytes": 2167234,
       "visible_bounds": null
     },
     {
@@ -546,6 +501,167 @@
         23,
         1229,
         1195
+      ]
+    },
+    {
+      "id": "symbol-bandit-wild",
+      "group": "symbol",
+      "file": "symbol-bandit-wild-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1102211,
+      "visible_bounds": [
+        73,
+        238,
+        1181,
+        1065
+      ]
+    },
+    {
+      "id": "symbol-upgrade",
+      "group": "symbol",
+      "file": "symbol-upgrade-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1382826,
+      "visible_bounds": [
+        61,
+        148,
+        1193,
+        1137
+      ]
+    },
+    {
+      "id": "symbol-upgrade-all",
+      "group": "symbol",
+      "file": "symbol-upgrade-all-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1048787,
+      "visible_bounds": [
+        80,
+        143,
+        1174,
+        1111
+      ]
+    },
+    {
+      "id": "symbol-coin",
+      "group": "symbol",
+      "file": "symbol-coin-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1205495,
+      "visible_bounds": [
+        136,
+        146,
+        1164,
+        1115
+      ]
+    },
+    {
+      "id": "symbol-dynamite",
+      "group": "symbol",
+      "file": "symbol-dynamite-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1242660,
+      "visible_bounds": [
+        125,
+        62,
+        1161,
+        1190
+      ]
+    },
+    {
+      "id": "symbol-transform",
+      "group": "symbol",
+      "file": "symbol-transform-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 999454,
+      "visible_bounds": [
+        238,
+        84,
+        1034,
+        1153
+      ]
+    },
+    {
+      "id": "symbol-key",
+      "group": "symbol",
+      "file": "symbol-key-v1.png",
+      "version": 1,
+      "requested_transparent": true,
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 829675,
+      "visible_bounds": [
+        73,
+        173,
+        1172,
+        1093
       ]
     }
   ]

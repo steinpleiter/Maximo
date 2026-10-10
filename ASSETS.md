@@ -50,7 +50,7 @@ whatever art a key supplies:
 - **Gem level** — a row of pips under the gem. The pack has one gem per colour,
   not seven, and the level is the difference between a 0.02x gem and a 2.70x
   one, so it has to be legible at a glance mid-cascade.
-- **Coin value** — a plate under the coin with its multiplier.
+- **Coin value** — a plate over the money bag with its multiplier.
 - **Upgrade steps** — a `+1`/`+2`/`+3` pill in the top-right corner. Keep that
   corner clear in upgrade art.
 
@@ -80,13 +80,13 @@ from the pips. Point them at distinct files if you ever draw per-level gems.
 | `special.peanut` | Fills a gap so a bird can cross | jar |
 | `special.bonus` | Scatter | inactive skull |
 | `special.superBonus` | Scatter that upgrades the bonus to Super | gold skull |
-| `special.wildBandit` | Wild paying as the top gem | *placeholder* |
-| `special.upgrade` | Upgrades one colour by 1–3 levels | *placeholder* |
-| `special.upgradeAll` | Upgrades all four colours | *placeholder* |
-| `special.coin` | Instant win, value drawn over it | *placeholder* |
-| `special.dynamite` | Explodes and grows the grid | *placeholder* |
-| `special.transform` | Repaints neighbouring gems | *placeholder* |
-| `special.key` | Releases the rival | *placeholder* |
+| `special.wildBandit` | Wild paying as the top gem | dark gunmetal W |
+| `special.upgrade` | Upgrades one colour by 1–3 levels | silver horseshoe |
+| `special.upgradeAll` | Upgrades all four colours | gold horseshoe |
+| `special.coin` | Instant win, value drawn over it | gold-filled money bag |
+| `special.dynamite` | Explodes and grows the grid | red dynamite bundle |
+| `special.transform` | Repaints neighbouring gems | moonshine jug |
+| `special.key` | Releases the rival | brass key |
 
 The two scatters use the pack's gold skull for the **Super** scatter and the
 inactive one for the ordinary scatter, so gold reads as the rarer of the two.
@@ -123,8 +123,6 @@ Two things are fitted to the current art and will need adjusting if it changes:
 
 ## Known gaps
 
-- Upgrade, coin, dynamite, transform, key and the bandit wild are all
-  placeholders.
 - The coin game has no art of its own.
 
 ## What is still drawn in code
@@ -137,3 +135,6 @@ Styled rather than replaced: the HUD, meter fill, buttons and quiz modal
 
 ## Purple portrait gem — 10 October 2026
 `gem-purple-v4.png` uses the smiling man on the right in the new silver-hat photograph, with photographic facial detail inside an amethyst hexagonal gem. All seven purple gem levels now load this PNG, matching the other colours; level pips still distinguish values. Its alpha bounds are recorded in assets/manifest.json.
+
+## Seven feature icons — 10 October 2026
+The seven previously missing board icons now use generated PNGs based on ELK Studios’ official Pirots 3 promotion package and paytable screenshots. Upgrade and Upgrade All are silver and gold horseshoes; Coin is a money bag; Transform is a moonshine jug. See [source research](assets/SYMBOL-REFERENCE-RESEARCH.md). Coin values and upgrade steps remain dynamic renderer labels.
