@@ -123,8 +123,6 @@ Two things are fitted to the current art and will need adjusting if it changes:
 
 ## Known gaps
 
-- **Purple gem** — the pack lists it as awaiting a source photo, so it draws as
-  a procedural placeholder and looks flat next to the other three.
 - Upgrade, coin, dynamite, transform, key and the bandit wild are all
   placeholders.
 - The coin game has no art of its own.
@@ -136,3 +134,6 @@ Styled rather than replaced: the HUD, meter fill, buttons and quiz modal
 (`src/render/board.ts`), and the symbol placeholders themselves
 (`src/render/symbols.ts`). Palette lives as CSS custom properties at the top of
 `style.css` and as `GEM_TINTS` in `src/render/symbols.ts`.
+
+## Purple portrait gem — 10 October 2026
+`gem-purple-v4.png` uses the smiling man on the right in the new silver-hat photograph, with photographic facial detail inside an amethyst hexagonal gem. All seven purple gem levels now load this PNG, matching the other colours; level pips still distinguish values. Its alpha bounds are recorded in assets/manifest.json.

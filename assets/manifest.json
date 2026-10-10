@@ -255,7 +255,22 @@
       "file": "gem-purple-v4.png",
       "version": 4,
       "requested_transparent": true,
-      "status": "awaiting_photo"
+      "status": "generated",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "bytes": 1926104,
+      "visible_bounds": [
+        102,
+        21,
+        1151,
+        1240
+      ]
     },
     {
       "id": "symbol-safe",

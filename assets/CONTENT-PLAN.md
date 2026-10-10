@@ -35,3 +35,6 @@ User requested real photographic faces and separate source pictures. Ready: red 
 
 ## Added scene — 10 October 2026
 Added a fourth background using the user-supplied canal-side street photograph: same elevated camera, apartment block, receding street, trees, red container and turquoise toilet, white site cabin, Dutch police van, cones and barrier tape. The scene uses bright daytime lighting and painted Pirots 3-inspired rendering. Current scope: 25 assets, 24 ready, one awaiting a fourth distinct Max photo. Active prompts are jobs.json and jobs-v5.json.
+
+## Four photographic gems completed — 10 October 2026
+Purple uses the new silver-hat photo, selecting the smiling man on the right. Blue, red, green and purple now each have a separate source photo. Prior pending notes above are historical.

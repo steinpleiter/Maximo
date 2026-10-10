@@ -1,0 +1,13 @@
+{
+  "id": "gem-purple",
+  "group": "gem",
+  "version": 4,
+  "file": "gem-purple-v4.png",
+  "transparent": true,
+  "references": [
+    "assets/gem-purple-v3.png",
+    "references/max-silver-hat-right.jpg",
+    "assets/gem-green-v4.png"
+  ],
+  "prompt": "Use case: identity-preserve compositing. Create the final purple Max portrait gem for the existing game asset set.\nIMAGE 1 is the purple gemstone edit target: preserve its upright six-sided hexagonal silhouette, thick amethyst bevels, faceted crystal border, rich violet/magenta palette, bright white and warm star glints, polished jewel material and centered isolated sprite composition.\nIMAGE 2 is the NEW portrait source. Use ONLY the smiling man ON THE RIGHT wearing the silver sequined party top hat, black jacket and white shirt. Replace the old DJ portrait completely with this right-hand man's actual photographic face and silver hat from image 2. Keep his exact toothy grin, eyes, nose, natural facial proportions, slight head tilt, real skin texture, and identifiable photographic likeness. Exclude the man on the left and other people's arms/hands. Preserve the silver hat recognizably and fit the complete hat and face within the hexagonal gem.\nIMAGE 3 is the approved green photo gem and provides the desired compositing treatment: a REAL PHOTOGRAPHIC portrait clearly visible inside a beautiful faceted gemstone, no drawn face. Keep natural skin tones with subtle violet rim reflections only; do not turn skin into purple stone, redraw, cartoon, sculpt, airbrush or idealize the face. Make the face and hat prominent, with shoulders minimally visible.\nBackground: true transparent alpha OUTSIDE the gem, with the entire purple gemstone opaque enough to read clearly. Square canvas, centered with small even transparent margins, no crop on jewel, no surrounding scenery, no lettering or watermark. Match the finish and scale of the existing photo gems."
+}
