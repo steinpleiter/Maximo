@@ -1,0 +1,61 @@
+{
+  "$comment": "Logical key -> image path. null means 'draw the built-in placeholder'. Drop your own files into src/assets/ and put the path here; nothing else in the code needs to change. See ASSETS.md for the sizes each key expects.",
+  "cellSize": 96,
+  "textures": {
+    "gem.blue.1": null,
+    "gem.blue.2": null,
+    "gem.blue.3": null,
+    "gem.blue.4": null,
+    "gem.blue.5": null,
+    "gem.blue.6": null,
+    "gem.blue.7": null,
+
+    "gem.green.1": null,
+    "gem.green.2": null,
+    "gem.green.3": null,
+    "gem.green.4": null,
+    "gem.green.5": null,
+    "gem.green.6": null,
+    "gem.green.7": null,
+
+    "gem.purple.1": null,
+    "gem.purple.2": null,
+    "gem.purple.3": null,
+    "gem.purple.4": null,
+    "gem.purple.5": null,
+    "gem.purple.6": null,
+    "gem.purple.7": null,
+
+    "gem.red.1": null,
+    "gem.red.2": null,
+    "gem.red.3": null,
+    "gem.red.4": null,
+    "gem.red.5": null,
+    "gem.red.6": null,
+    "gem.red.7": null,
+
+    "bird.blue": null,
+    "bird.green": null,
+    "bird.purple": null,
+    "bird.red": null,
+    "bandit": null,
+
+    "special.wild": null,
+    "special.wildBandit": null,
+    "special.upgrade": null,
+    "special.upgradeAll": null,
+    "special.coin": null,
+    "special.dynamite": null,
+    "special.peanut": null,
+    "special.transform": null,
+    "special.key": null,
+    "special.bonus": null,
+    "special.superBonus": null,
+
+    "board.background": null,
+    "board.cell": null,
+    "board.trainCell": null,
+    "coinGame.bag": null,
+    "coinGame.scorpion": null
+  }
+}
